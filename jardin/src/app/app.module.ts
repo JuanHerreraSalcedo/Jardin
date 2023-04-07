@@ -15,6 +15,9 @@ import { RegistroComponent } from './login/registro/registro.component';
 import { MisionComponent } from './modal/mision/mision.component';
 import { WhatsappComponent } from './whatsapp/whatsapp.component';
 import { CursosComponent } from './components/pages/cursos/cursos.component';
+import { VisionComponent } from './modal/vision/vision.component';
+import { MapaComponent } from './components/pages/contactanos/mapa/mapa.component';
+import { ContactoComponent } from './components/pages/contactanos/contacto/contacto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,10 @@ import { CursosComponent } from './components/pages/cursos/cursos.component';
     RegistroComponent,
     MisionComponent,
     WhatsappComponent,
-    CursosComponent
+    CursosComponent,
+    VisionComponent,
+    MapaComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
