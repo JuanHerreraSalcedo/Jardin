@@ -1,0 +1,12 @@
+.container {
+    width: 100%;
+    max-width: 960px; /* establecer un ancho máximo para el contenedor */
+    margin: 0 auto; /* centrar el contenedor en la página */
+  
+    img {
+      width: 100%; /* establecer el ancho de la imagen al 100% del ancho del contenedor */
+      height: 100%; /* establecer la altura de la imagen al 100% del alto del contenedor */
+      object-fit: cover; /* ajustar la imagen para que cubra todo el espacio del contenedor lateralmente */
+    }
+  }
+  

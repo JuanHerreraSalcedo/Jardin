@@ -1,0 +1,16 @@
+.date {
+    width: 50%;
+    max-width: 960px; /* establecer un ancho máximo para el contenedor */
+    margin: 0 auto; /* centrar el contenedor en la página */
+  
+    img {
+      max-width: 100%; /* ajustar el ancho máximo de la imagen al 100% del ancho del contenedor */
+      height: auto; /* permitir que la altura de la imagen se ajuste automáticamente */
+    }
+  
+    @media screen and (max-width: 767px) {
+      /* reglas específicas para dispositivos móviles */
+      max-width: 100%; /* establecer el ancho máximo del contenedor al 100% del ancho de la pantalla */
+    }
+  }
+  
