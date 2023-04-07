@@ -1,0 +1,18 @@
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* Esto establece la capa de nivel superior para que el botón flotante aparezca por encima de otros elementos en la página */
+  }
+  
+  /* Esto alinea el botón de WhatsApp a la derecha y le da un margen derecho de 20 píxeles */
+  .whatsapp-button a {
+    display: block;
+    float: right;
+    margin-right: 20px;
+  }
+  
