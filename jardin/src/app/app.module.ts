@@ -12,6 +12,9 @@ import { BannerHomeComponent } from './components/modules/banner-home/banner-hom
 import { BannerInstitucionalComponent } from './components/modules/banner-institucional/banner-institucional.component';
 import { IniciarSesionComponent } from './login/iniciar-sesion/iniciar-sesion.component';
 import { RegistroComponent } from './login/registro/registro.component';
+import { MisionComponent } from './modal/mision/mision.component';
+import { WhatsappComponent } from './whatsapp/whatsapp.component';
+import { CursosComponent } from './components/pages/cursos/cursos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,10 @@ import { RegistroComponent } from './login/registro/registro.component';
     BannerHomeComponent,
     BannerInstitucionalComponent,
     IniciarSesionComponent,
-    RegistroComponent
+    RegistroComponent,
+    MisionComponent,
+    WhatsappComponent,
+    CursosComponent
   ],
   imports: [
     BrowserModule,
