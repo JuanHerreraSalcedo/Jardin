@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { FirebaseCodeErrorService } from './services/firebase-code-error.service';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -18,6 +22,11 @@ import { CursosComponent } from './components/pages/cursos/cursos.component';
 import { VisionComponent } from './modal/vision/vision.component';
 import { MapaComponent } from './components/pages/contactanos/mapa/mapa.component';
 import { ContactoComponent } from './components/pages/contactanos/contacto/contacto.component';
+import { environment } from 'src/environments/environment';
+import { NosotrosComponent } from './components/pages/nosotros/nosotros.component';
+import { PasswordComponent } from './login/password/password.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,13 +43,21 @@ import { ContactoComponent } from './components/pages/contactanos/contacto/conta
     CursosComponent,
     VisionComponent,
     MapaComponent,
-    ContactoComponent
+    ContactoComponent,
+    NosotrosComponent,
+    PasswordComponent,
+    SpinnerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [
+    FirebaseCodeErrorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
