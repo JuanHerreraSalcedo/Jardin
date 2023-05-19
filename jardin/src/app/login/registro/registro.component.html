@@ -1,5 +1,6 @@
 <section class="h-100 bg-light mt-5">
-  <div class="container py-5 h-100">
+  <!-- <div *ngIf="!loading" class="container py-5 h-100"> para colocar el spinner cuando este cargando el registro -->
+    <div class="container py-5 h-100">  
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <div class="card card-registration my-4">
@@ -11,108 +12,59 @@
             </div>
             <div class="col-xl-6">
               <div class="card-body p-md-5 text-black">
-                <h3 class="mb-5 text-uppercase">Formulario de registro de estudiante</h3>
+                <h3 class="mb-5 text-uppercase">Formulario de registro</h3>
 
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1m" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Example1m">Nombres</label>
+                <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" class="form-control" formControlName="nombre" placeholder="Ingresa tu nombre">
+                        <label class="form-label" for="form3Example1m">Nombres</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" class="form-control" formControlName="apellido" placeholder="Ingresa tu apellido">
+                        <label class="form-label" for="form3Example1n">Apellidos</label>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1n" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Example1n">Apellidos</label>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1m1" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Example1m1">Nombre de la madre</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1n1" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Example1n1">Nombre del padre</label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example8" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example8">Dirección</label>
-                </div>
-
-                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-
-                  <h6 class="mb-0 me-4">Genero: </h6>
-
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                      value="option1" />
-                    <label class="form-check-label" for="femaleGender">Femenino</label>
+                  <div class="form-outline mb-3">
+                    <input type="email" class="form-control" formControlName="direccion" placeholder="Ingresa la dirección">
+                    <label class="form-label" for="form3Example8">Dirección</label>
                   </div>
 
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                      value="option2" />
-                    <label class="form-check-label" for="maleGender">Masculino</label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="rol" id="acudiente" value="acudiente" name="rol">
+                    <label class="form-check-label" for="acudiente">Acudiente</label>
                   </div>
-
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-
-                    <select class="select">
-                      <option value="1">Departamento</option>
-                      <option value="2">Option 1</option>
-                      <option value="3">Option 2</option>
-                      <option value="4">Option 3</option>
-                    </select>
-
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="rol" id="docente" value="docente" name="rol">
+                    <label class="form-check-label" for="docente">Docente</label>
                   </div>
-                  <div class="col-md-6 mb-4">
-
-                    <select class="select">
-                      <option value="1">Ciudad</option>
-                      <option value="2">Option 1</option>
-                      <option value="3">Option 2</option>
-                      <option value="4">Option 3</option>
-                    </select>
-
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="rol" id="admin" value="admin" name="rol">
+                    <label class="form-check-label" for="admin">Admin</label>
                   </div>
-                </div>
+                                    
 
-                <!-- <div class="form-outline mb-4">
-                  <input type="text" id="form3Example99" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example99">Course</label>
-                </div> -->
-
-                <div class="form-outline mb-4">
-                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option selected>Cursos</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label class="form-label" for="form3Example97">Selecciona curso</label>
-                </div>
-                
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example97" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example97">Correo electronico</label>
-                </div>
-
-                <div class="d-flex justify-content-end pt-3">
-                  <button type="button" class="btn btn-warning btn-lg ms-2">Enviar formulario</button>
-                </div>
-
+                  <div class="form-outline mt-4 mb-4">
+                    <input type="email" class="form-control" formControlName="correo" placeholder="Ingresa tu correo electrónico">
+                    <label class="form-label" for="form3Example97">Correo electrónico</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" class="form-control" formControlName="contraseña" placeholder="Ingresa tu contraseña">
+                    <label class="form-label" for="form3Example97">Ingresa tu contraseña</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" class="form-control" formControlName="repetircontraseña" placeholder="Ingresa tu contraseña">
+                    <label class="form-label" for="form3Example97">Repite la contraseña</label>
+                  </div>
+                  <div class="d-flex justify-content-end pt-3">
+                    <button type="submit" class="btn btn-warning btn-lg ms-2">Enviar formulario</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -120,4 +72,6 @@
       </div>
     </div>
   </div>
-</section>
+  <!-- <app-spinner *ngIf="loading"></app-spinner> -->
+</section>    
+                      

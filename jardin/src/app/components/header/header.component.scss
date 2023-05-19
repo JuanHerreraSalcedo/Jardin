@@ -66,6 +66,23 @@ li{
     transition: 0.5s;
 }
 
+// .circular-image {
+//     height: 50px;
+//     width: 25px;
+//     border-radius: 50%; /* Hace que el icono tenga forma circular */
+//     overflow: hidden; /* Oculta cualquier contenido que sobresalga del círculo */
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+  
+//   .circular-image img {
+//     width: 50%; /* Ajusta el tamaño de la imagen al tamaño del círculo */
+//     height: auto; /* Mantiene la proporción original de la imagen */
+//     object-fit: contain; /* Ajusta la imagen al tamaño del contenedor sin recortarla */
+//   }
+  
+  
 
 @media screen and (min-width: 992px) {
     
