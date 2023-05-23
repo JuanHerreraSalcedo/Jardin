@@ -1,19 +1,41 @@
-.content{
+.content {
     text-align: center;
 }
 
-.card-title{
+.card-title {
     text-align: center;
 }
 
 .btn {
     justify-content: center;
     display: flex;
-    background-color:	#8000FF;
+    background-color: #8000FF;
     border: 2px solid #8000FF;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: #078CAA;
     border: 2px solid #078CAA;
+}
+
+.banner__Bcards {
+    padding-top: 70px;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+@media (max-width: 767px) {
+    .banner__Bcards {
+        padding-top: 20px;
+    }
+
+    .container {
+        padding-top: 20px;
+    }
+
+    .cards {
+        margin-bottom: 20px;
+    }
 }

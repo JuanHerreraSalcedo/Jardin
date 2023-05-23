@@ -1,5 +1,6 @@
+<div class="desktop-header">
 <div class="scroll">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
     <div class="container-fluid">
       <a class="navbar-brand d-lg-none" href="#">
         <img src="../../../assets/img/logo.png" alt="logo">
@@ -35,26 +36,40 @@
     </div>
   </nav>
 </div>
+</div>
 
-
-  <!-- <div class="sidebar--top d-none d-xl-inline-block w-100 bg--white">
-    <div class="container-full">
-      <div class="row d-xl-inline-flex align-items-center justify-content-between w-100 mx-0">
-        <div class="col-xl-4 pr-xl-0">
-          <div class="col-xl-3 px-xl-0">
-            <ul class="navjustify-content-center nav--redes">
-              <li class="nav-item">
-                <a target="_blank" class="nav-link px-1">
-                  <span class="">
-                    <i class="fa-brands fa-facebook" style="color: #000000;"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item"></li>
-              <li class="nav-item"></li>
-            </ul>
-          </div>
-        </div>
+<!-- Header para vista móvil -->
+<div class="mobile-header">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1  d-block d-lg-none">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand d-lg-none" href="#">
+        <img src="../../../assets/img/logo.png" alt="logo">
+      </a> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile" aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavMobile">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="cursos">Cursos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="institucional">Institucional</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sobre nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="contacto" tabindex="-1" aria-disabled="true">Contactanos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="iniciar-sesion" tabindex="-1" aria-disabled="true">Inicia Sesión</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </div> -->
+  </nav>
+</div>

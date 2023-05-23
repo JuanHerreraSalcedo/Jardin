@@ -1,92 +1,103 @@
-.navbar-brand img{
-    width: 80px;
-
+.desktop-header .navbar {
+  background-image: url(../../../assets/img/clouds.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  padding-top: 45px;
 }
 
-ul{
-    display: flex;
+.desktop-header .navbar-brand {
+  display: none;
+}
+
+.desktop-header .navbar-toggler {
+  border-color: transparent;
+}
+
+.desktop-header .navbar-nav {
+  position: relative;
+  top: -20px;
+  justify-content: center;
+}
+
+.desktop-header ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.desktop-header li {
+  margin: 0 10px;
+}
+
+.desktop-header .navbar .navbar-nav .nav-link {
+  color: #000;
+  font-size: 1.1em;
+  padding: .5em 1em;
+}
+
+.desktop-header .navbar ul li a {
+  position: relative;
+}
+
+.desktop-header .navbar ul li a::before {
+  bottom: -5px;
+  right: -10px;
+  width: 90%;
+  opacity: 0;
+}
+
+.desktop-header .navbar ul li a::after {
+  bottom: -10px;
+  left: 0;
+  width: 60%;
+}
+
+.desktop-header .navbar ul li a.activo::before,
+.desktop-header .navbar ul li a:hover::before {
+  opacity: 1;
+  width: 70%;
+}
+
+.desktop-header .navbar ul li a.activo::after,
+.desktop-header .navbar ul li a:hover::after {
+  opacity: 1;
+  width: 40%;
+}
+
+.desktop-header .navbar ul li a::before,
+.desktop-header .navbar ul li a::after {
+  border-bottom: 2px solid #fff;
+  content: '';
+  position: absolute;
+  transition: 0.5s;
+}
+
+.mobile-header .navbar {
+  background-image: none;
+}
+
+.mobile-header .navbar-nav li {
+  margin: 0 10px;
+}
+
+@media screen and (min-width: 576px) {
+  .desktop-header .navbar-nav {
+    flex-wrap: wrap;
+    height: 157px;
+  }
+
+  .desktop-header .navbar-nav > li {
+    margin: 10px;
+  }
+
+  .desktop-header .navbar-collapse {
     justify-content: center;
-    list-style: none;
-    padding: 0;
-}
+  }
 
-li{
-    margin: 0 10px;
-}
-
-.navbar-brand{
-    margin-right: 0;
-    padding: 0 1em;
-}
-
-.navbar-nav{
-    align-items: center;
-}
-
-.navbar .navbar-nav .nav-link{
-    color: #fff;
-    font-size: 1.1em;
-    padding: .5 1em;
-}
-
-.navbar ul li a{
-    position: relative;
-}
-
-//animación del los link
-
-.navbar ul li a::before{
-    bottom: -5px;
-    right: -10px;
-    width: 90%;
-    opacity: 0;
-}
-
-.navbar ul li a::after{
-    bottom: -10px;
-    left: 0;
-    width: 60%;
-}
-.navbar ul li a.activo::before,
-.navbar ul li a:hover::before{
-    opacity: 1;
-    width: 70%;
-}
-
-.navbar ul li a.activo::after,
-.navbar ul li a:hover::after{
-    opacity: 1;
-    width: 40%;
-}
-
-.navbar ul li a::before,.navbar ul li a::after {
-    border-bottom: 2px solid #fff;
-    content: '';
-    position: absolute;
-    transition: 0.5s;
-}
-
-// .circular-image {
-//     height: 50px;
-//     width: 25px;
-//     border-radius: 50%; /* Hace que el icono tenga forma circular */
-//     overflow: hidden; /* Oculta cualquier contenido que sobresalga del círculo */
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-  
-//   .circular-image img {
-//     width: 50%; /* Ajusta el tamaño de la imagen al tamaño del círculo */
-//     height: auto; /* Mantiene la proporción original de la imagen */
-//     object-fit: contain; /* Ajusta la imagen al tamaño del contenedor sin recortarla */
-//   }
-  
-  
-
-@media screen and (min-width: 992px) {
-    
-.navbar-brand img{
-    width: 100px;
-}
+  .mobile-header {
+    display: none;
+  }
 }
