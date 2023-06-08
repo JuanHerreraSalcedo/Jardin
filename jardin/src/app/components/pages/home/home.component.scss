@@ -1,5 +1,11 @@
 .content {
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+
+  &.show {
+    opacity: 1;
+  }
 }
 
 .card-title {
