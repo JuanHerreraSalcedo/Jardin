@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cursos.component.scss']
 })
 export class CursosComponent implements OnInit {
-
+  mostrarDatosInvisibles = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -53,5 +53,8 @@ export class CursosComponent implements OnInit {
       imageHeight: 100,
       imageAlt: 'Custom image',
     })
+  }
+  mostrarDatos() {
+    this.mostrarDatosInvisibles = !this.mostrarDatosInvisibles;
   }
 }

@@ -1,0 +1,51 @@
+.container {
+    padding-top: 212px;
+}
+h3{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+.zoom-img {
+  transition: transform 0.3s;
+}
+
+.zoom-img:hover {
+  transform: scale(1.1);
+}
+
+.home__leaf-1{
+    width: 100px;
+    top: 15rem;
+    left: 0rem;
+    transform: rotate(41deg);
+    position: absolute;
+    opacity: 0.2;
+  }  
+.home__leaf-2{
+    width: 100px;
+    right: -2rem;
+    bottom: 1rem;
+    transform: rotate(-15deg);
+    position: absolute;
+    opacity: .2;
+  } 
+.acerca__leaf{
+    width: 100px;
+    opacity: .2;
+    position: absolute;
+    right: -1.5rem;
+    bottom: -50rem;
+    transform: rotate(-15deg);
+}
+.acerca__leaf2{
+    width: 100px;
+    opacity: .2;
+    position: absolute;
+    left: 0rem;
+    bottom: -30rem;
+    transform: rotate(-15deg);
+}
