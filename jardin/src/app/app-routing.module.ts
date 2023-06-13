@@ -11,17 +11,20 @@ import { ContactoComponent } from './components/pages/contactanos/contacto/conta
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 // modal
 import { MisionComponent } from './modal/mision/mision.component';
+import { NosotrosComponent } from './components/pages/nosotros/nosotros.component';
 
 const routes: Routes = [
   {path: '', pathMatch:'full', redirectTo: 'home'},
   {path: 'home', component: HomeComponent},
+  {path: 'login', component: IniciarSesionComponent},
   {path: 'iniciar-sesion', component: IniciarSesionComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'institucional', component: InstitucionalComponent},
   {path: 'cursos', component: CursosComponent},
+  {path: 'nosotros', component:NosotrosComponent},
   {path: 'contacto', component:ContactoComponent},
   {path: 'password', component: PasswordComponent},
-  {path: 'dashboard', component: DashboardComponent},
+  { path: 'dashboard', component: DashboardComponent},
   
   {path: 'mision', component: MisionComponent}
 ];

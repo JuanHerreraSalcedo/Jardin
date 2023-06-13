@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nosotros',
@@ -11,5 +12,10 @@ export class NosotrosComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  gallery() {
+    Swal.fire({
+      imageUrl: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp',
+      imageAlt: 'Boat on Calm Water',
+    });
+  }
 }
