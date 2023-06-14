@@ -7,6 +7,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { FirebaseCodeErrorService } from './services/firebase-code-error.service';
+import { AuthService } from './services/auth.service';
+
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -27,6 +29,8 @@ import { NosotrosComponent } from './components/pages/nosotros/nosotros.componen
 import { PasswordComponent } from './login/password/password.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { PanelAcudienteComponent } from './components/pages/panel-acudiente/panel-acudiente.component';
+import { PanelDocenteComponent } from './components/pages/panel-docente/panel-docente.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +51,9 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
     NosotrosComponent,
     PasswordComponent,
     SpinnerComponent,
-    DashboardComponent
+    DashboardComponent,
+    PanelAcudienteComponent,
+    PanelDocenteComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,9 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
-    FirebaseCodeErrorService
+    FirebaseCodeErrorService,
+        AuthService, // Agrega el servicio aquí
+
   ],
   bootstrap: [AppComponent]
 })

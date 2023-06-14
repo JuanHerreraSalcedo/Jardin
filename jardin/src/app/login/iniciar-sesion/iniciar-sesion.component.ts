@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -18,7 +19,8 @@ export class IniciarSesionComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.loginUsuario = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
@@ -39,10 +41,22 @@ export class IniciarSesionComponent implements OnInit {
     this.loading = true;
 
     this.afAuth.signInWithEmailAndPassword(correo, contraseña)
-      .then((user) => {
-        console.log(user, contraseña);
-        this.router.navigate(['/dashboard']);
-      })
+    .then((user) => {
+      console.log(user, contraseña);
+      this.authService.getUserRole().subscribe((rol: string) => {
+        if (rol === 'docente') {
+          this.router.navigate(['/panel-docente']);
+        } else if (rol === 'acudiente') {
+          this.router.navigate(['/panelAcudiente']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
+      });
+    })
+    // ...
+  
+    // ...
+  
       .catch((error) => {
         console.log(error);
         if (error.code === 'auth/invalid-email') {

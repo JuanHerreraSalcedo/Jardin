@@ -1,51 +1,131 @@
-<div class="desktop-header">
-<div class="scroll">
-  <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
-    <div class="container-fluid">
-      <a class="navbar-brand d-lg-none" href="#">
-        <img src="../../../assets/img/logo.png" alt="logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Header principal -->
+<div class="desktop-header" *ngIf="!isLoggedIn || (rol !== 'admin' && rol !== 'docente' && rol !== 'acudiente')">
+  <!-- Contenido del header para usuarios no autenticados o roles no especificados -->
+  <div class="scroll">
+    <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="cursos">Cursos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="institucional">Institucional</a>
-          </li>
-          <a class="navbar-brand d-none d-lg-block circular-image" href="#">
-            <img src="../../../assets/img/logo.png" alt="logo1">
-          </a>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sobre nosotros</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="contacto" tabindex="-1" aria-disabled="true">Contactanos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="iniciar-sesion" tabindex="-1" aria-disabled="true">Inicia Sesión</a>
-          </li>
-        </ul>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cursos">Cursos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="institucional">Institucional</a>
+            </li>
+            <a href="#" target="_blank" class="logo">
+              <img src="../../../assets/img/logo.png" alt="WhatsApp" width="50" height="50">
+            </a>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="nosotros">Sobre nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="contacto">Contáctanos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="iniciar-sesion">Inicia Sesión</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-</div>
+    </nav>
+  </div>
 </div>
 
+<!-- Header para admin -->
+<div class="desktop-header-admin" *ngIf="isLoggedIn && rol === 'admin'">
+  <!-- Contenido del header para el rol de admin -->
+  <div class="scroll">
+    <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin"
+          aria-controls="navbarNavAdmin" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAdmin">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+            </li>
+            <!-- Agrega aquí los enlaces específicos para el rol de admin -->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="dashboard">Panel de administración</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+<!-- Header para docente -->
+<div class="desktop-header" *ngIf="isLoggedIn && rol === 'docente'">
+  <!-- Contenido del header para el rol de docente -->
+  <div class="scroll">
+    <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDocente"
+          aria-controls="navbarNavDocente" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDocente">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+            </li>
+            <!-- Agrega aquí los enlaces específicos para el rol de docente -->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="dashboard">Panel de docente</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+<!-- Header para acudiente -->
+<div class="desktop-header" *ngIf="isLoggedIn && rol === 'acudiente'">
+  <!-- Contenido del header para el rol de acudiente -->
+  <div class="scroll">
+    <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAcudiente"
+          aria-controls="navbarNavAcudiente" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAcudiente">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+            </li>
+            <!-- Agrega aquí los enlaces específicos para el rol de acudiente -->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="dashboard">Panel de acudiente</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
 <!-- Header para vista móvil -->
-<div class="mobile-header">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1  d-block d-lg-none">
+<div class="mobile-header" *ngIf="!isLoggedIn || (rol !== 'admin' && rol !== 'docente' && rol !== 'acudiente')">
+  <!-- Contenido del header para usuarios no autenticados o roles no especificados -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
     <div class="container-fluid">
-      <!-- <a class="navbar-brand d-lg-none" href="#">
-        <img src="../../../assets/img/logo.png" alt="logo">
-      </a> -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile" aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile"
+        aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavMobile">
@@ -60,13 +140,88 @@
             <a class="nav-link" routerLink="institucional">Institucional</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sobre nosotros</a>
+            <a class="nav-link" routerLink="nosotros">Sobre nosotros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="contacto" tabindex="-1" aria-disabled="true">Contactanos</a>
+            <a class="nav-link" routerLink="contacto">Contáctanos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="iniciar-sesion" tabindex="-1" aria-disabled="true">Inicia Sesión</a>
+            <a class="nav-link" routerLink="iniciar-sesion">Inicia Sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<!-- Header para vista móvil - admin -->
+<div class="mobile-header" *ngIf="isLoggedIn && rol === 'admin'">
+  <!-- Contenido del header para el rol de admin en la versión móvil -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileAdmin"
+        aria-controls="navbarNavMobileAdmin" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavMobileAdmin">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+          </li>
+          <!-- Agrega aquí los enlaces específicos para el rol de admin en la versión móvil -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="dashboard">Panel de administración</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<!-- Header para vista móvil - docente -->
+<div class="mobile-header" *ngIf="isLoggedIn && rol === 'docente'">
+  <!-- Contenido del header para el rol de docente en la versión móvil -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileDocente"
+        aria-controls="navbarNavMobileDocente" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavMobileDocente">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+          </li>
+          <!-- Agrega aquí los enlaces específicos para el rol de docente en la versión móvil -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="dashboard">Panel de docente</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<!-- Header para vista móvil - acudiente -->
+<div class="mobile-header" *ngIf="isLoggedIn && rol === 'acudiente'">
+  <!-- Contenido del header para el rol de acudiente en la versión móvil -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileAcudiente"
+        aria-controls="navbarNavMobileAcudiente" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavMobileAcudiente">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+          </li>
+          <!-- Agrega aquí los enlaces específicos para el rol de acudiente en la versión móvil -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="dashboard">Panel de acudiente</a>
           </li>
         </ul>
       </div>

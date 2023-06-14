@@ -16,3 +16,24 @@
     margin-right: 20px;
   }
   
+  @media screen and (max-width: 767px) {
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      max-width: 80%; /* Limita el ancho máximo del botón de WhatsApp para evitar desbordamientos */
+      overflow: hidden; /* Oculta cualquier contenido que se desborde del botón */
+      white-space: nowrap; /* Evita que el texto dentro del botón se divida en varias líneas */
+      text-align: right;
+    }
+    
+    .whatsapp-button a {
+      display: inline-block;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    
+    }
+
+  
