@@ -12,21 +12,25 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 // modal
 import { MisionComponent } from './modal/mision/mision.component';
 import { NosotrosComponent } from './components/pages/nosotros/nosotros.component';
+import { PanelAcudienteComponent } from './components/pages/panel-acudiente/panel-acudiente.component';
+import { PanelDocenteComponent } from './components/pages/panel-docente/panel-docente.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  {path: '', pathMatch:'full', redirectTo: 'home'},
-  {path: 'home', component: HomeComponent},
-  {path: 'login', component: IniciarSesionComponent},
-  {path: 'iniciar-sesion', component: IniciarSesionComponent},
-  {path: 'registro', component: RegistroComponent},
-  {path: 'institucional', component: InstitucionalComponent},
-  {path: 'cursos', component: CursosComponent},
-  {path: 'nosotros', component:NosotrosComponent},
-  {path: 'contacto', component:ContactoComponent},
-  {path: 'password', component: PasswordComponent},
-  { path: 'dashboard', component: DashboardComponent},
-  
-  {path: 'mision', component: MisionComponent}
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: IniciarSesionComponent },
+  { path: 'iniciar-sesion', component: IniciarSesionComponent },
+  { path: 'registro', component: RegistroComponent },
+  { path: 'institucional', component: InstitucionalComponent },
+  { path: 'cursos', component: CursosComponent },
+  { path: 'nosotros', component: NosotrosComponent },
+  { path: 'contacto', component: ContactoComponent },
+  { path: 'password', component: PasswordComponent },
+  { path: 'mision', component: MisionComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  { path: 'panelAcudiente', component: PanelAcudienteComponent, canActivate: [AuthGuard], data: { roles: ['acudiente'] } },
+  { path: 'panel-docente', component: PanelDocenteComponent, canActivate: [AuthGuard], data: { roles: ['docente'] } },
 ];
 
 @NgModule({

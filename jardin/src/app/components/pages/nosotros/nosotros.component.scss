@@ -49,3 +49,28 @@ p{
     bottom: -30rem;
     transform: rotate(-15deg);
 }
+
+@media screen and (max-width: 576px) {
+    .container{
+        padding-top: 102px;
+    }
+    .zoom-img {
+        transition: none;
+      }
+      
+      .zoom-img:hover {
+        transform: none;
+      }
+      .home__leaf-1{
+        display: none;
+      }  
+    .home__leaf-2{
+        display: none;
+      } 
+    .acerca__leaf{
+        display: none;
+    }
+    .acerca__leaf2{
+        display: none;
+    }
+  }
