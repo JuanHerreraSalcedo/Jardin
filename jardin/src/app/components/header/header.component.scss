@@ -83,6 +83,11 @@
   margin: 0 10px;
 }
 
+.navbar-nav .logo img {
+  width: 80px; /* Ajusta el tamaño del logo según tus necesidades */
+  height: 80px;
+}
+
 @media screen and (min-width: 576px) {
   .desktop-header .navbar-nav {
     flex-wrap: wrap;
