@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, of } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(
-    private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth
-  ) {}
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {}
 
+  // Obtener el rol del usuario actual
   getUserRole(): Observable<string> {
     return this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.firestore
+          return this.afs
             .collection('usuarios')
             .doc(user.uid)
             .valueChanges()
@@ -33,6 +31,29 @@ export class AuthService {
     );
   }
 
+  // Obtener el nombre del usuario actual
+  getUserName(): Observable<string> {
+    return from(this.afAuth.currentUser).pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.afs
+            .collection('usuarios')
+            .doc(user.uid)
+            .get()
+            .pipe(
+              map((doc) => {
+                const userData = doc.data() as { nombre?: string };
+                return userData?.nombre || '';
+              })
+            );
+        } else {
+          return of('');
+        }
+      })
+    );
+  }
+
+  // Cerrar sesión
   logout(): Promise<void> {
     return this.afAuth.signOut();
   }
