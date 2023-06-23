@@ -88,6 +88,27 @@
   height: 80px;
 }
 
+.header-admin{
+  text-decoration: none;
+  color: #ffffff;  /* Cambia el color a blanco o el color deseado */
+  transition: none;  /* Desactiva la transición/animación */
+  cursor: default;  /* Desactiva el cursor de cambio al colocar el mouse */
+  height: 100%;
+}
+
+.side-nav-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.side-nav-button:hover{
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 30%;
+}
+
 @media screen and (min-width: 576px) {
   .desktop-header .navbar-nav {
     flex-wrap: wrap;
