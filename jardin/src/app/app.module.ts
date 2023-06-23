@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { FirebaseCodeErrorService } from './services/firebase-code-error.service';
 import { AuthService } from './services/auth.service';
@@ -31,6 +31,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { PanelAcudienteComponent } from './components/pages/panel-acudiente/panel-acudiente.component';
 import { PanelDocenteComponent } from './components/pages/panel-docente/panel-docente.component';
+import { RegistroAlumnoComponent } from './components/admin/registro-alumno/registro-alumno.component';
+import { RegistroDocenteComponent } from './components/admin/registro-docente/registro-docente.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,12 +55,15 @@ import { PanelDocenteComponent } from './components/pages/panel-docente/panel-do
     SpinnerComponent,
     DashboardComponent,
     PanelAcudienteComponent,
-    PanelDocenteComponent
+    PanelDocenteComponent,
+    RegistroAlumnoComponent,
+    RegistroDocenteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [

@@ -11,11 +11,13 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean;
   rol: string;
+  userName: string;
   private userRoleSubscription: Subscription;
 
   constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn = false;
     this.rol = '';
+    this.userName = '';
     this.userRoleSubscription = new Subscription();
   }
 
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userRoleSubscription = this.authService.getUserRole().subscribe((userRole) => {
       this.isLoggedIn = true;
       this.rol = userRole;
+      this.getUserName();
     });
   }
 
@@ -37,5 +40,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       console.error('Error al cerrar sesión:', error);
     });
   }
-  
+
+  private async getUserName(): Promise<void> {
+    try {
+      const userName = await this.authService.getUserName().toPromise();
+      if (userName !== null && userName !== undefined) {
+        this.userName = userName;
+      }
+    } catch (error) {
+      console.error('Error al obtener el nombre de usuario:', error);
+    }
+  }
 }

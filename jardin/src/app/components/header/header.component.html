@@ -5,11 +5,11 @@
     <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
             </li>
@@ -39,55 +39,117 @@
 </div>
 
 <!-- Header para admin -->
-<div class="desktop-header-admin" *ngIf="isLoggedIn && rol === 'admin'">
+<div class="desktop-header-admin d-lg-block d-none" *ngIf="isLoggedIn && rol === 'admin'">
   <!-- Contenido del header para el rol de admin -->
   <div class="scroll">
-    <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin"
-          aria-controls="navbarNavAdmin" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand navbar-dark bg-dark px-2 nav-admin">
+      <div class="side-nav-button p-2 me-3 text-light">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <a href="#" class="nav-bar-brand px-4 header-admin">Header and sidenav</a>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item dropdown">
+            <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+              administración
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li class="dropdown-item" routerLink="/registro-alumno">Registro alumno</li>
+              <li class="dropdown-item">Registro docente</li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+              Listado de estudiantes
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li class="dropdown-item">Parvulos</li>
+              <li class="dropdown-item">Transicion</li>
+              <li class="dropdown-item">Prejardin</li>
+              <li class="dropdown-item">Jardín</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="">Diligenciar conrreos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="">Calificaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="">Reuniones</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="profile-logo dropstart">
+        <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+          {{ userName }}
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAdmin">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
-            </li>
-            <!-- Agrega aquí los enlaces específicos para el rol de admin -->
-            <li class="nav-item">
-              <a class="nav-link" routerLink="dashboard">Panel de administración</a>
-            </li>
-          </ul>
+        <div class="dropdown-menu">
+          <!-- Aquí puedes agregar más elementos del menú desplegable si es necesario -->
+          <button class="dropdown-item">Perfil</button>
+          <button class="dropdown-item" (click)="logout()">Cerrar sesión</button>
         </div>
       </div>
+      
+      
     </nav>
+
   </div>
 </div>
 
 
 <!-- Header para docente -->
-<div class="desktop-header" *ngIf="isLoggedIn && rol === 'docente'">
+<div class="desktop-header-docente d-lg-block d-none" *ngIf="isLoggedIn && rol === 'docente'">
   <!-- Contenido del header para el rol de docente -->
   <div class="scroll">
-    <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
+    <nav class="navbar navbar-dark bg-primary fixed-top">
       <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDocente"
-          aria-controls="navbarNavDocente" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand">{{ userName }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDocente">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
-            </li>
-            <!-- Agrega aquí los enlaces específicos para el rol de docente -->
-            <li class="nav-item">
-              <a class="nav-link" routerLink="dashboard">Panel de docente</a>
-            </li>
-          </ul>
+        <div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" data-bs-backdrop="false">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Perfil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+            <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+          </div>
         </div>
       </div>
     </nav>
+    
   </div>
 </div>
 
