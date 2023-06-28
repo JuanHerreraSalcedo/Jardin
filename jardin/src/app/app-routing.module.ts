@@ -10,6 +10,7 @@ import { CursosComponent } from './components/pages/cursos/cursos.component';
 import { ContactoComponent } from './components/pages/contactanos/contacto/contacto.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { RegistroAlumnoComponent } from './components/admin/registro-alumno/registro-alumno.component';
+import { RegistroDocenteComponent } from './components/admin/registro-docente/registro-docente.component';
 // modal
 import { MisionComponent } from './modal/mision/mision.component';
 import { NosotrosComponent } from './components/pages/nosotros/nosotros.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'mision', component: MisionComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
   { path: 'registro-alumno', component: RegistroAlumnoComponent},
+  { path: 'registro-docente', component: RegistroDocenteComponent},
   { path: 'panelAcudiente', component: PanelAcudienteComponent, canActivate: [AuthGuard], data: { roles: ['acudiente'] } },
   { path: 'panel-docente', component: PanelDocenteComponent, canActivate: [AuthGuard], data: { roles: ['docente'] } },
 ];
