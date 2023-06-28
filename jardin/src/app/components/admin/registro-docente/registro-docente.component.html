@@ -1,1 +1,140 @@
-<p>registro-docente works!</p>
+<div class="container">
+    <div class="toolbar">
+    
+        <div class="add-employee">
+            <button class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar docente</button>
+        </div>
+
+        <div class="search-employees">
+            <input type="search" class="form-control" placeholder="Buscar al docente">
+        </div>
+    </div>
+    
+    <!-- Listado de docentes -->
+    <div class="employees black-border">
+    <div class="col text-center">
+        <span class="text-secondary fs-2 fw-bold fst-italic">No hay docentes actualmente</span>
+    </div>
+    </div>
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registra los datos del docente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+            <form [formGroup]="registrarUsuario" (ngSubmit)="registrar()">
+                <!-- nombre y apellido del docente -->
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ingresa el nombre" required>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ingresa los apellidos" required>
+                    </div>
+                </div>
+
+                <!-- Correo y contraseña -->
+                <div class="mt-3">
+                    <div class="col">
+                        <input type="email" class="form-control" id="correo" formControlName="correo" required placeholder="Ingresa el correo" required>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-2">
+                            <input type="password" class="form-control" id="contraseña" formControlName="contraseña" placeholder="Ingresa la contraseña" required>
+                        </div>
+                        <div class="col mt-2">
+                            <input type="password" class="form-control" id="repetirContraseña" formControlName="repetirContraseña" placeholder="Repite la contraseña" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- informacion personal del docente -->
+                <div class="row mt-4">
+                    <div class="col form-heading">
+                        <h6 class="text-secondary fst-italic">
+                            Información personal
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="datepicker" class="form-laber">Fecha de nacimiento</label>
+                        <input type="date"   class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <h6 class="text-secundary">Genero</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" formControlName="genero" id="masculino" value="masculino" name="genero">
+                                    <label class="form-check-label" for="masculino">Masculino</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" formControlName="genero" id="femenino" value="femenino" name="genero">
+                                    <label class="form-check-label" for="femenino">Femenino</label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <select name="curso" id="" class="form-select" formControlName="curso" [(ngModel)]="registrarUsuario.value.curso">
+                            <option value="default" select>Asignar curso</option>
+                            <option *ngFor="let option of courseOptions; let i = index" value="{{i}}">
+                                {{option | titlecase}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="profile" class="form-label">Foto de perfil</label>
+                        <input type="file" class="form-control" id="fotoPerfil" formControlName="fotoPerfil" id="fotoPerfil" #fileInput>
+                    </div>
+                </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="rol" id="docente" value="docente" name="rol">
+                    <label class="form-check-label" for="docente">Docente</label>
+                  </div>
+
+                <!-- Experiencia laboral -->
+                <div class="row mt-5">
+                    <div class="col form-heading">
+                        <h6 class="text-secundary fst-italic">Experiencia laboral</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="escuela" formControlName="escuela" required placeholder="Nombre de la escuela o jardín">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <input type="number" class="form-control" id="años" formControlName="años" required placeholder="Años de Experiencia">
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" id="salario" formControlName="salario" required placeholder="Salario">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="registrar()" data-bs-dismiss="modal">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
