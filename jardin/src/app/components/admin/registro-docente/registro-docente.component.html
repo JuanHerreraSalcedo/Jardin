@@ -11,10 +11,22 @@
     </div>
     
     <!-- Listado de docentes -->
-    <div class="employees black-border">
-    <div class="col text-center">
-        <span class="text-secondary fs-2 fw-bold fst-italic">No hay docentes actualmente</span>
-    </div>
+    <div class="employees">
+        <div class="row mt-5" *ngIf="docente.length === 0">
+            <div class="col text-center">
+                <span class="text-secondary fs-2 fw-bold fst-italic">No hay docentes actualmente</span>
+            </div>
+        </div>
+    
+        <!-- Listado de los docentes activos -->
+        <div class="row mt-4" *ngFor="let docente of docenteToDisplay; let ei = index;">
+            <div class="col">
+                <app-listado-docentes>
+
+                </app-listado-docentes>
+            </div>
+        </div>
+
     </div>
 </div>
   
@@ -88,14 +100,16 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col">
-                        <select name="curso" id="" class="form-select" formControlName="curso" [(ngModel)]="registrarUsuario.value.curso">
-                            <option value="default" select>Asignar curso</option>
-                            <option *ngFor="let option of courseOptions; let i = index" value="{{i}}">
-                                {{option | titlecase}}
-                            </option>
+                    <div class="form-group">
+                        <label for="curso">Curso</label>
+                        <select id="curso" formControlName="curso" class="form-control">
+                          <option value="" disabled selected>Selecciona un curso</option>
+                          <option *ngFor="let option of courseOptions" [value]="option.value">{{option.label | titlecase}}</option>
                         </select>
-                    </div>
+                        <div *ngIf="registrarUsuario.controls['curso'].invalid && (registrarUsuario.controls['curso'].dirty || registrarUsuario.controls['curso'].touched)">
+                        </div>
+                      </div>
+                      
                 </div>
             
                 <div class="row mt-3">
@@ -104,10 +118,10 @@
                         <input type="file" class="form-control" id="fotoPerfil" formControlName="fotoPerfil" id="fotoPerfil" #fileInput>
                     </div>
                 </div>
-                  <div class="form-check form-check-inline">
+                  <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" formControlName="rol" id="docente" value="docente" name="rol">
                     <label class="form-check-label" for="docente">Docente</label>
-                  </div>
+                  </div> -->
 
                 <!-- Experiencia laboral -->
                 <div class="row mt-5">

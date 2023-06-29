@@ -15,13 +15,15 @@ export class RegistroDocenteComponent implements OnInit {
   title = 'Crud docentes';
 
   courseOptions = [
-    'Parvulos',
-    'Transición',
-    'Prejardín',
-    'Jardín',
+    { value: 'parvulos', label: 'Parvulos' },
+    { value: 'transicion', label: 'Transición' },
+    { value: 'prejardin', label: 'Prejardín' },
+    { value: 'jardin', label: 'Jardín' },
   ];
 
   registrarUsuario: FormGroup;
+  docente: any[] = [];
+  docenteToDisplay: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +37,6 @@ export class RegistroDocenteComponent implements OnInit {
       correo: ['', [Validators.required, Validators.email]],
       contraseña: ['', Validators.required],
       repetirContraseña: ['', Validators.required],
-      rol: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       genero: ['', Validators.required],
       curso: ['', Validators.required], // Agregado el campo 'curso' al formulario
@@ -47,6 +48,13 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Obtener los datos de los docentes desde Firestore
+    this.firestore.collection('usuarios', ref => ref.where('rol', '==', 'docente'))
+      .valueChanges()
+      .subscribe((data: any) => {
+        this.docente = data;
+        this.docenteToDisplay = data;
+      });
   }
 
   ngAfterViewInit(): void {
@@ -62,10 +70,10 @@ export class RegistroDocenteComponent implements OnInit {
       const correo = this.registrarUsuario.value.correo;
       const contraseña = this.registrarUsuario.value.contraseña;
       const repetirContraseña = this.registrarUsuario.value.repetirContraseña;
-      const rol = this.registrarUsuario.value.rol;
+      const rol = 'docente'; // Establecer el rol como 'docente'
       const fechaNacimiento = this.registrarUsuario.value.fechaNacimiento;
       const genero = this.registrarUsuario.value.genero;
-      const curso = this.registrarUsuario.value.curso; // Obtener el valor de 'curso'
+      const curso = this.mapCursoValue(this.registrarUsuario.value.curso); // Obtener el valor mapeado de 'curso'
       const fotoPerfil = this.registrarUsuario.value.fotoPerfil;
       const escuela = this.registrarUsuario.value.escuela;
       const años = this.registrarUsuario.value.años;
@@ -102,9 +110,7 @@ export class RegistroDocenteComponent implements OnInit {
               text: 'El usuario ha sido registrado exitosamente',
               icon: 'success',
               confirmButtonText: 'Aceptar'
-            }).then(() => {
-              this.router.navigate(['/lista-docentes']);
-            });
+            })
           })
           .catch((error) => {
             console.error('Error al guardar los datos en Firestore: ', error);
@@ -116,5 +122,10 @@ export class RegistroDocenteComponent implements OnInit {
           Swal.fire('Error', 'Ocurrió un error al crear el usuario', 'error');
         });
     }
+  }
+
+  mapCursoValue(value: string): string {
+    const cursoOption = this.courseOptions.find((option) => option.value === value);
+    return cursoOption ? cursoOption.label : '';
   }
 }

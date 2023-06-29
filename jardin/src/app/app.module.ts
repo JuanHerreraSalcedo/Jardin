@@ -33,6 +33,7 @@ import { PanelAcudienteComponent } from './components/pages/panel-acudiente/pane
 import { PanelDocenteComponent } from './components/pages/panel-docente/panel-docente.component';
 import { RegistroAlumnoComponent } from './components/admin/registro-alumno/registro-alumno.component';
 import { RegistroDocenteComponent } from './components/admin/registro-docente/registro-docente.component';
+import { ListadoDocentesComponent } from './components/admin/listado-docentes/listado-docentes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { RegistroDocenteComponent } from './components/admin/registro-docente/re
     PanelAcudienteComponent,
     PanelDocenteComponent,
     RegistroAlumnoComponent,
-    RegistroDocenteComponent
+    RegistroDocenteComponent,
+    ListadoDocentesComponent
   ],
   imports: [
     BrowserModule,
