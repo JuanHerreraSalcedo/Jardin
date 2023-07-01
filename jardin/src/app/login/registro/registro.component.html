@@ -1,4 +1,4 @@
-<section class="h-100 bg-light mt-5">
+<section class="h-100 bg-light">
   <!-- <div *ngIf="!loading" class="container py-5 h-100"> para colocar el spinner cuando este cargando el registro -->
     <div class="container py-5 h-100">  
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -28,6 +28,12 @@
                         <label class="form-label" for="form3Example1n">Apellidos</label>
                       </div>
                     </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="number" class="form-control" formControlName="cedula" placeholder="Ingresa tu cedula">
+                        <label class="form-label" for="form3Example1n">Cedula</label>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="form-outline mb-3">
@@ -35,7 +41,7 @@
                     <label class="form-label" for="form3Example8">Dirección</label>
                   </div>
 
-                  <div class="form-check form-check-inline">
+                  <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" formControlName="rol" id="acudiente" value="acudiente" name="rol">
                     <label class="form-check-label" for="acudiente">Acudiente</label>
                   </div>
@@ -47,7 +53,7 @@
                     <input class="form-check-input" type="radio" formControlName="rol" id="admin" value="admin" name="rol">
                     <label class="form-check-label" for="admin">Admin</label>
                   </div>
-                                    
+                                     -->
 
                   <div class="form-outline mt-4 mb-4">
                     <input type="email" class="form-control" formControlName="correo" placeholder="Ingresa tu correo electrónico">

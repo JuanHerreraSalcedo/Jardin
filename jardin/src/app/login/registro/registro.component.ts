@@ -24,11 +24,11 @@ export class RegistroComponent implements OnInit {
     this.registrarUsuario = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
+      cedula: ['', Validators.required],
       direccion: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       contraseña: ['', Validators.required],
       repetircontraseña: ['', Validators.required],
-      rol: ['', Validators.required]
     });
   }
 
@@ -38,18 +38,18 @@ export class RegistroComponent implements OnInit {
     // Obtener los valores del formulario
     const nombre = this.registrarUsuario.value.nombre;
     const apellido = this.registrarUsuario.value.apellido;
+    const cedula = this.registrarUsuario.value.cedula;
     const direccion = this.registrarUsuario.value.direccion;
     const correo = this.registrarUsuario.value.correo;
     const contraseña = this.registrarUsuario.value.contraseña;
     const repetircontraseña = this.registrarUsuario.value.repetircontraseña;
-    const rol = this.registrarUsuario.value.rol;
 
     // Imprimir los valores en la consola para verificar
-    console.log(nombre, apellido, direccion, correo, contraseña, repetircontraseña, rol);
+    console.log(nombre, apellido, direccion, correo, contraseña, repetircontraseña);
 
     // Validar el formulario
     if (this.registrarUsuario.invalid) {
-      Swal.fire('Error', 'Por favor, ingresa un correo electronico valido', 'error');
+      Swal.fire('Error', 'Por favor, ingresa un correo electrónico válido', 'error');
       return;
     }
 
@@ -69,28 +69,29 @@ export class RegistroComponent implements OnInit {
         this.firestore.collection('usuarios').doc(userId).set({
           nombre: nombre,
           apellido: apellido,
+          cedula: cedula,
           direccion: direccion,
           correo: correo,
-          rol: rol
+          rol: 'Acudiente' // Establecer el rol como "Acudiente" automáticamente
         })
-        .then(() =>{
+        .then(() => {
           console.log('Datos guardados en Firestore');
           Swal.fire({
-            title: 'Exito',
+            title: 'Éxito',
             text: 'Usuario registrado exitosamente',
             icon: 'success',
             allowOutsideClick: false
-          }).then((result) =>{
-            if (result.isConfirmed){
+          }).then((result) => {
+            if (result.isConfirmed) {
               this.router.navigate(['/iniciar-sesion']);
               // this.loading = false;
             }
-          })
-        })
-          .catch((error) => {
-            console.error('Error al guardar los datos en Firestore:', error);
-            Swal.fire('Error', 'Ha ocurrido un error al registrar el usuario', 'error');
           });
+        })
+        .catch((error) => {
+          console.error('Error al guardar los datos en Firestore:', error);
+          Swal.fire('Error', 'Ha ocurrido un error al registrar el usuario', 'error');
+        });
       })
       .catch((error) => {
         console.error('Error al crear el usuario:', error);
