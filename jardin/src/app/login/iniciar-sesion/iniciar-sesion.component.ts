@@ -49,7 +49,7 @@ export class IniciarSesionComponent implements OnInit {
         } else if (rol === 'acudiente') {
           this.router.navigate(['/panelAcudiente']);
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/registro-docente']);
         }
       });
     })

@@ -1,115 +1,108 @@
 <section class="h-100 h-custom gradient-custom-2">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12">
-          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-            <div class="card-body p-0">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <form [formGroup]="registrarEstudiante" (ngSubmit)="registrar()">
               <div class="row g-0">
                 <div class="col-lg-6">
                   <div class="p-5">
                     <h3 class="fw-normal mb-5" style="color: #4835d4;">Información del niño</h3>
-  
-                    <!-- <div class="mb-4 pb-2">
-                      <select class="select">
-                        <option value="1">Title</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="4">Four</option>
-                      </select>
-                    </div> -->
-  
+
                     <div class="row">
                       <div class="col-md-6 mb-4 pb-2">
-  
                         <div class="form-outline">
-                          <input type="text" placeholder="Ingresa el nombre" class="form-control form-control-lg" />
+                          <input type="text" placeholder="Ingresa el nombre" class="form-control form-control-lg"
+                            formControlName="nombres" />
                           <label class="form-label">Nombres</label>
                         </div>
-  
                       </div>
                       <div class="col-md-6 mb-4 pb-2">
                         <div class="form-outline">
-                          <input type="text" placeholder="Ingresa los apellidos" class="form-control form-control-lg" />
-                          <label class="form-label" >Apellidos</label>
+                          <input type="text" placeholder="Ingresa los apellidos" class="form-control form-control-lg"
+                            formControlName="apellidos" />
+                          <label class="form-label">Apellidos</label>
                         </div>
-  
                       </div>
                     </div>
-  
-                    <div class="mb-4 pb-2">
-                      <select class="select">
-                        <option value="1">Párvulos</option>
-                        <option value="2">Transición</option>
-                        <option value="3">Prejardín</option>
-                        <option value="4">Jardin</option>
+
+                    <div class="form-group">
+                      <select id="curso" formControlName="curso" class="form-control">
+                        <option value="" disabled selected>Selecciona un curso</option>
+                        <option *ngFor="let option of courseOptions" [value]="option.value">{{option.label | titlecase}}</option>
                       </select>
+                      <div *ngIf="registrarEstudiante.controls['curso'].invalid && (registrarEstudiante.controls['curso'].dirty || registrarEstudiante.controls['curso'].touched)">
+                      </div>
+                      <label for="curso">Curso</label>
                     </div>
-  
-                    <div class="row">
+
+                    <div class="row mt-2">
                       <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
-  
                         <div class="form-outline">
-                          <input type="number" placeholder="Edad" class="form-control form-control-lg" />
+                          <input type="number" placeholder="Edad" class="form-control form-control-lg"
+                            formControlName="edad" />
                           <label class="form-label" for="form3Examplev5">Edad</label>
                         </div>
-  
                       </div>
 
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Carné de vacunas</label>
-                        <input class="form-control" type="file">
+                        <input class="form-control" type="file" formControlName="carneVacunas">
                       </div>
 
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Fecha de nacimiento</label>
-                        <input class="form-control" type="date">
+                        <input class="form-control" type="date" formControlName="fechaNacimiento">
                       </div>
-
                     </div>
-  
+
                   </div>
                 </div>
                 <div class="col-lg-6 bg-indigo text-white">
                   <div class="p-5">
-                    <h3 class="fw-normal mb-5">Informacion general</h3>
-  
+                    <h3 class="fw-normal mb-5">Información general</h3>
+
                     <div class="mb-4 pb-2">
                       <div class="form-outline form-white">
-                        <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                        <input type="text" class="form-control form-control-lg" formControlName="direccion" />
                         <label class="form-label" for="form3Examplea2">Dirección</label>
                       </div>
                     </div>
-  
+
                     <div class="mb-4 pb-2">
                       <div class="form-outline form-white">
-                        <input type="number" class="form-control form-control-lg" />
+                        <input type="number" class="form-control form-control-lg" formControlName="telefono" />
                         <label class="form-label" for="form3Examplea3">Telefono</label>
                       </div>
                     </div>
-  
+
                     <div class="mb-4 pb-2">
                       <div class="form-outline form-white">
-                        <input type="text" id="form3Examplea6" class="form-control form-control-lg" />
+                        <input type="text" id="form3Examplea6" class="form-control form-control-lg"
+                          formControlName="ciudad" />
                         <label class="form-label" for="form3Examplea6">Ciudad</label>
                       </div>
                     </div>
-  
+
                     <div class="mb-4">
                       <div class="form-outline form-white">
-                        <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplea9">Correo de usuario asociado</label>
+                        <input type="number" id="form3Examplea9" class="form-control form-control-lg"
+                          formControlName="cedula" />
+                        <label class="form-label" for="form3Examplea9">Cedula del acudiente</label>
                       </div>
                     </div>
-  
-                    <button type="button" class="btn btn-light btn-lg"
-                      data-mdb-ripple-color="dark">Registrar estudiante</button>
-  
+
+                    <button type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark">Registrar
+                      estudiante</button>
+
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
