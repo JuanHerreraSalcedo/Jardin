@@ -31,8 +31,8 @@ const routes: Routes = [
   { path: 'password', component: PasswordComponent },
   { path: 'mision', component: MisionComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
-  { path: 'registro-alumno', component: RegistroAlumnoComponent},
-  { path: 'registro-docente', component: RegistroDocenteComponent},
+  { path: 'registro-alumno', component: RegistroAlumnoComponent, canActivate: [AuthGuard], data: { roles: ['admin'] }  } ,
+  { path: 'registro-docente', component: RegistroDocenteComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
   { path: 'panelAcudiente', component: PanelAcudienteComponent, canActivate: [AuthGuard], data: { roles: ['acudiente'] } },
   { path: 'panel-docente', component: PanelDocenteComponent, canActivate: [AuthGuard], data: { roles: ['docente'] } },
 ];
