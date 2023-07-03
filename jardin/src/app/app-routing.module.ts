@@ -11,6 +11,10 @@ import { ContactoComponent } from './components/pages/contactanos/contacto/conta
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { RegistroAlumnoComponent } from './components/admin/registro-alumno/registro-alumno.component';
 import { RegistroDocenteComponent } from './components/admin/registro-docente/registro-docente.component';
+import { ListadoParvulosComponent } from './components/docentes/listado-parvulos/listado-parvulos.component';
+import { ListadoTransicionComponent } from './components/docentes/listado-transicion/listado-transicion.component';
+import { ListadoPrejardinComponent } from './components/docentes/listado-prejardin/listado-prejardin.component';
+import { ListadoJardinComponent } from './components/docentes/listado-jardin/listado-jardin.component';
 // modal
 import { MisionComponent } from './modal/mision/mision.component';
 import { NosotrosComponent } from './components/pages/nosotros/nosotros.component';
@@ -33,6 +37,10 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
   { path: 'registro-alumno', component: RegistroAlumnoComponent, canActivate: [AuthGuard], data: { roles: ['admin'] }  } ,
   { path: 'registro-docente', component: RegistroDocenteComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  { path: 'parvulos', component: ListadoParvulosComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  { path: 'transicion', component: ListadoTransicionComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  { path: 'prejardin', component: ListadoPrejardinComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  { path: 'jardin', component: ListadoJardinComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
   { path: 'panelAcudiente', component: PanelAcudienteComponent, canActivate: [AuthGuard], data: { roles: ['acudiente'] } },
   { path: 'panel-docente', component: PanelDocenteComponent, canActivate: [AuthGuard], data: { roles: ['docente'] } },
 ];

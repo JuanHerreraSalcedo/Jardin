@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="d-flex justify-content-between mb-3">
+        <div class="form-group">
+          <input type="text" class="form-control" id="buscarEstudiante" [(ngModel)]="buscarEstudiante" (input)="filtrarEstudiantes()" placeholder="Buscar estudiante">
+        </div>
+        <div>
+          <button class="btn btn-dark" (click)="descargarLista()">Descargar Lista</button>
+        </div>
+      </div>
+      
+      <!-- Aquí va el contenido del listado de estudiantes -->
+      
+      
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Curso</th>
+          <th>Ciudad</th>
+          <th>Edad</th>
+          <th>Fecha de nacimiento</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estudiante of estudiantes">
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{ estudiante.apellidos }} {{ estudiante.nombres }} </p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.curso }}</p>
+          </td>
+          <td>
+            <p class="text-muted mb-0">{{ estudiante.ciudad }}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.edad }}</p>
+          </td>
+          <td>{{ estudiante.fechaNacimiento }}</td>
+          <td>
+            <button type="button" class="btn btn-link btn-sm btn-rounded">
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
