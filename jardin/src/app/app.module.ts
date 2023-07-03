@@ -34,6 +34,11 @@ import { PanelDocenteComponent } from './components/pages/panel-docente/panel-do
 import { RegistroAlumnoComponent } from './components/admin/registro-alumno/registro-alumno.component';
 import { RegistroDocenteComponent } from './components/admin/registro-docente/registro-docente.component';
 import { ListadoDocentesComponent } from './components/admin/listado-docentes/listado-docentes.component';
+import { CorreosComponent } from './components/pages/correos/correos.component';
+import { ListadoParvulosComponent } from './components/docentes/listado-parvulos/listado-parvulos.component';
+import { ListadoTransicionComponent } from './components/docentes/listado-transicion/listado-transicion.component';
+import { ListadoPrejardinComponent } from './components/docentes/listado-prejardin/listado-prejardin.component';
+import { ListadoJardinComponent } from './components/docentes/listado-jardin/listado-jardin.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +64,12 @@ import { ListadoDocentesComponent } from './components/admin/listado-docentes/li
     PanelDocenteComponent,
     RegistroAlumnoComponent,
     RegistroDocenteComponent,
-    ListadoDocentesComponent
+    ListadoDocentesComponent,
+    CorreosComponent,
+    ListadoParvulosComponent,
+    ListadoTransicionComponent,
+    ListadoPrejardinComponent,
+    ListadoJardinComponent
   ],
   imports: [
     BrowserModule,
