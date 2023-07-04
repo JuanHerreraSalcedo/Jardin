@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registro-docente',
@@ -15,10 +15,10 @@ export class RegistroDocenteComponent implements OnInit {
   title = 'Crud docentes';
 
   courseOptions = [
-    { value: 'parvulos', label: 'Parvulos' },
-    { value: 'transicion', label: 'Transición' },
-    { value: 'prejardin', label: 'Prejardín' },
-    { value: 'jardin', label: 'Jardín' },
+    { value: 'Párvulos', label: 'Párvulos' },
+    { value: 'Transición', label: 'Transición' },
+    { value: 'Prejardín', label: 'Prejardín' },
+    { value: 'Jardín', label: 'Jardín' },
   ];
 
   registrarUsuario: FormGroup;
@@ -27,9 +27,9 @@ export class RegistroDocenteComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.registrarUsuario = this.fb.group({
       nombre: ['', Validators.required],
@@ -39,7 +39,7 @@ export class RegistroDocenteComponent implements OnInit {
       repetirContraseña: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       genero: ['', Validators.required],
-      curso: ['', Validators.required], // Agregado el campo 'curso' al formulario
+      curso: ['', Validators.required],
       fotoPerfil: [null],
       escuela: ['', Validators.required],
       años: ['', Validators.required],
@@ -48,7 +48,6 @@ export class RegistroDocenteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Obtener los datos de los docentes desde Firestore
     this.firestore.collection('usuarios', ref => ref.where('rol', '==', 'docente'))
       .valueChanges()
       .subscribe((data: any) => {
@@ -63,17 +62,17 @@ export class RegistroDocenteComponent implements OnInit {
     }
   }
 
-  registrar() {
+  async registrar() {
     if (this.registrarUsuario.valid) {
       const nombre = this.registrarUsuario.value.nombre;
       const apellido = this.registrarUsuario.value.apellido;
       const correo = this.registrarUsuario.value.correo;
       const contraseña = this.registrarUsuario.value.contraseña;
       const repetirContraseña = this.registrarUsuario.value.repetirContraseña;
-      const rol = 'docente'; // Establecer el rol como 'docente'
+      const rol = 'docente';
       const fechaNacimiento = this.registrarUsuario.value.fechaNacimiento;
       const genero = this.registrarUsuario.value.genero;
-      const curso = this.mapCursoValue(this.registrarUsuario.value.curso); // Obtener el valor mapeado de 'curso'
+      const curso = this.mapCursoValue(this.registrarUsuario.value.curso);
       const fotoPerfil = this.registrarUsuario.value.fotoPerfil;
       const escuela = this.registrarUsuario.value.escuela;
       const años = this.registrarUsuario.value.años;
@@ -84,43 +83,36 @@ export class RegistroDocenteComponent implements OnInit {
         return;
       }
 
-      this.afAuth.createUserWithEmailAndPassword(correo, contraseña)
-        .then((userCredential) => {
-          const userId = userCredential.user?.uid;
-
-          this.firestore.collection('usuarios').doc(userId).set({
-            nombre: nombre,
-            apellido: apellido,
-            correo: correo,
-            contraseña: contraseña,
-            repetirContraseña: repetirContraseña,
-            rol: rol,
-            fechaNacimiento: fechaNacimiento,
-            genero: genero,
-            curso: curso, // Agregar el campo 'curso' al documento
-            fotoPerfil: fotoPerfil,
-            escuela: escuela,
-            años: años,
-            salario: salario
-          })
-          .then(() => {
-            console.log('Datos guardados en Firestore');
-            Swal.fire({
-              title: 'Usuario creado',
-              text: 'El usuario ha sido registrado exitosamente',
-              icon: 'success',
-              confirmButtonText: 'Aceptar'
-            })
-          })
-          .catch((error) => {
-            console.error('Error al guardar los datos en Firestore: ', error);
-            Swal.fire('Error', 'Ocurrió un error al crear el usuario', 'error');
-          });
-        })
-        .catch((error) => {
-          console.error('Error al crear el usuario: ', error);
-          Swal.fire('Error', 'Ocurrió un error al crear el usuario', 'error');
+      try {
+        await this.firestore.collection('usuarios').add({
+          nombre: nombre,
+          apellido: apellido,
+          correo: correo,
+          contraseña: contraseña,
+          repetirContraseña: repetirContraseña,
+          rol: rol,
+          fechaNacimiento: fechaNacimiento,
+          genero: genero,
+          curso: curso,
+          fotoPerfil: fotoPerfil,
+          escuela: escuela,
+          años: años,
+          salario: salario
         });
+
+        console.log('Datos guardados en Firestore');
+        Swal.fire({
+          title: 'Usuario creado',
+          text: 'El usuario ha sido registrado exitosamente',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then(() => {
+          this.registrarUsuario.reset();
+        });
+      } catch (error) {
+        console.error('Error al crear el usuario: ', error);
+        Swal.fire('Error', 'Ocurrió un error al crear el usuario', 'error');
+      }
     }
   }
 

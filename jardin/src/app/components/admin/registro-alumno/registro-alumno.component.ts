@@ -14,10 +14,10 @@ export class RegistroAlumnoComponent implements OnInit {
   registrarEstudiante: FormGroup;
   usuarioId?: string; // Variable para almacenar el ID del usuario registrado
   courseOptions = [
-    { value: 'parvulos', label: 'Parvulos' },
-    { value: 'transicion', label: 'Transición' },
-    { value: 'prejardin', label: 'Prejardín' },
-    { value: 'jardin', label: 'Jardín' },
+    { value: 'Párvulos', label: 'Parvulos' },
+    { value: 'Transición', label: 'Transición' },
+    { value: 'Prejardín', label: 'Prejardín' },
+    { value: 'Jardín', label: 'Jardín' },
   ];
 
   constructor(
