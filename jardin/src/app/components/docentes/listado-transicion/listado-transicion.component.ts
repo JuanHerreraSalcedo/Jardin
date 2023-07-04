@@ -23,8 +23,12 @@ export class ListadoTransicionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.obtenerEstudiantes();
+  }
+
+  obtenerEstudiantes(): void {
     this.firestore
-      .collection('estudiantes', (ref) => ref.where('curso', '==', 'transicion'))
+      .collection('estudiantes', (ref) => ref.where('curso', '==', 'transición'))
       .valueChanges()
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;
@@ -43,16 +47,10 @@ export class ListadoTransicionComponent implements OnInit {
         return nombreCompleto.includes(criterio);
       });
     } else {
-      // Restablecer la lista completa de estudiantes
-      this.firestore
-        .collection('estudiantes', (ref) => ref.where('curso', '==', 'transicion'))
-        .valueChanges()
-        .subscribe((estudiantes) => {
-          this.estudiantes = estudiantes;
-          this.sortEstudiantesAlfabeticamente(); // Ordenar estudiantes alfabéticamente
-          this.paginarEstudiantes(); // Paginar estudiantes
-        });
+      this.obtenerEstudiantes(); // Restablecer la lista completa de estudiantes
     }
+
+    this.paginarEstudiantes(); // Actualizar estudiantes paginados después de filtrar
   }
 
   paginarEstudiantes(): void {

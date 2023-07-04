@@ -25,7 +25,7 @@ export class ListadoParvulosComponent implements OnInit {
 
   ngOnInit(): void {
     this.firestore
-      .collection('estudiantes', (ref) => ref.where('curso', '==', 'parvulos'))
+      .collection('estudiantes', (ref) => ref.where('curso', '==', 'párvulos'))
       .valueChanges()
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;

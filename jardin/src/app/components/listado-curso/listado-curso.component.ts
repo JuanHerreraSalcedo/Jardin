@@ -1,34 +1,58 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
 @Component({
-  selector: 'app-listado-jardin',
-  templateUrl: './listado-jardin.component.html',
-  styleUrls: ['./listado-jardin.component.scss']
+  selector: 'app-listado-curso',
+  templateUrl: './listado-curso.component.html',
+  styleUrls: ['./listado-curso.component.scss']
 })
-export class ListadoJardinComponent implements OnInit {
+export class ListadoCursoComponent implements OnInit {
   estudiantes: any[] = [];
   estudiantesPaginados: any[] = [];
   buscarEstudiante: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 15; // Actualiza el número máximo de registros por página
+  cursoDocente: string = ''; // Variable para almacenar el curso del docente
 
   constructor(
-    private firestore: AngularFirestore,
-    private storage: AngularFireStorage
+    private auth: AngularFireAuth,
+    private firestore: AngularFirestore
   ) {}
 
   ngOnInit(): void {
-    this.obtenerEstudiantes();
+    this.obtenerCursoDocente();
   }
+
+  obtenerCursoDocente(): void {
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        const correoDocente = user.email; // Obtener el correo del docente autenticado
+        this.firestore
+          .collection('usuarios', (ref) => ref.where('correo', '==', correoDocente).limit(1))
+          .valueChanges()
+          .subscribe((usuarios: any[]) => {
+            if (usuarios && usuarios.length > 0) {
+              const docente = usuarios[0];
+              this.cursoDocente = docente.curso; // Asignar el valor del campo "curso" a la variable "cursoDocente"
+              console.log('Curso del docente:', this.cursoDocente); // Agrega esta línea
+              this.obtenerEstudiantes();
+            } else {
+              console.log('No se encontró el docente');
+              // Manejar el caso si no se encuentra el docente
+            }
+          });
+      }
+    });
+  }
+  
 
   obtenerEstudiantes(): void {
     this.firestore
-      .collection('estudiantes', (ref) => ref.where('curso', '==', 'jardín'))
+      .collection('estudiantes', (ref) => ref.where('curso', '==', this.cursoDocente))
       .valueChanges()
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;
@@ -64,11 +88,6 @@ export class ListadoJardinComponent implements OnInit {
     this.paginarEstudiantes();
   }
 
-  getFotoUrl(fotoPath: string): Observable<string | null> {
-    const ref = this.storage.ref(fotoPath);
-    return ref.getDownloadURL();
-  }
-
   descargarLista(): void {
     // Crear el libro de Excel
     const workbook: XLSX.WorkBook = XLSX.utils.book_new();
@@ -79,7 +98,9 @@ export class ListadoJardinComponent implements OnInit {
 
     // Generar el archivo Excel
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const data: Blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    });
 
     // Descargar el archivo Excel
     saveAs(data, 'lista_estudiantes.xlsx');
@@ -100,6 +121,8 @@ export class ListadoJardinComponent implements OnInit {
   }
 
   getTotalPages(): number[] {
-    return Array(Math.ceil(this.estudiantes.length / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
+    return Array(Math.ceil(this.estudiantes.length / this.itemsPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
   }
 }

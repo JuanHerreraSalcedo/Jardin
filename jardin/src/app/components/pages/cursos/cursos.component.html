@@ -11,7 +11,7 @@
                             <img src="../../../../assets/img/parvulos.png" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Parvulos</h5>
-                                    <a class="btn btn-primary btn__card" (click)="parvulos()">Más información</a>
+                                    <a class="btn btn-primary button" (click)="parvulos()">Más información</a>
                                 </div>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Prejardín</h5>
                                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                                    <a class="btn btn-primary btn__card" (click)="prejardin()">Más información</a>
+                                    <a class="btn btn-primary button" (click)="prejardin()">Más información</a>
                                 </div>
                         </div> <!--sass/styles.scss styles.css --watch-->
                     </div>
@@ -31,7 +31,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Jardín</h5>
                                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                                    <a class="btn btn-primary btn__card" (click)="jardin()">Más información</a>
+                                    <a class="btn btn-primary button" (click)="jardin()">Más información</a>
                                 </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Transición</h5>
                                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                                    <a class="btn btn-primary btn__card" (click)="transicion()">Más información</a>
+                                    <a class="btn btn-primary button" (click)="transicion()">Más información</a>
                                 </div>
                         </div>
                     </div>
@@ -51,7 +51,12 @@
 
         
 </div>
-<a class="btn btn-primary btn__card" (click)="mostrarDatos()">Dale click para más información</a>
+
+
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a class="btn btn-primary button " (click)="mostrarDatos()">Dale click para más información</a>
+</div>
+
 
 <div *ngIf="mostrarDatosInvisibles" id="datosInvisibles">
    
