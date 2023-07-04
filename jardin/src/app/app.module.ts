@@ -39,6 +39,7 @@ import { ListadoParvulosComponent } from './components/docentes/listado-parvulos
 import { ListadoTransicionComponent } from './components/docentes/listado-transicion/listado-transicion.component';
 import { ListadoPrejardinComponent } from './components/docentes/listado-prejardin/listado-prejardin.component';
 import { ListadoJardinComponent } from './components/docentes/listado-jardin/listado-jardin.component';
+import { ListadoCursoComponent } from './components/listado-curso/listado-curso.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import { ListadoJardinComponent } from './components/docentes/listado-jardin/lis
     ListadoParvulosComponent,
     ListadoTransicionComponent,
     ListadoPrejardinComponent,
-    ListadoJardinComponent
+    ListadoJardinComponent,
+    ListadoCursoComponent
   ],
   imports: [
     BrowserModule,

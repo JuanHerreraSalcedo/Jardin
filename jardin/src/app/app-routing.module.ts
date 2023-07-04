@@ -15,6 +15,7 @@ import { ListadoParvulosComponent } from './components/docentes/listado-parvulos
 import { ListadoTransicionComponent } from './components/docentes/listado-transicion/listado-transicion.component';
 import { ListadoPrejardinComponent } from './components/docentes/listado-prejardin/listado-prejardin.component';
 import { ListadoJardinComponent } from './components/docentes/listado-jardin/listado-jardin.component';
+import { ListadoCursoComponent } from './components/listado-curso/listado-curso.component';
 // modal
 import { MisionComponent } from './modal/mision/mision.component';
 import { NosotrosComponent } from './components/pages/nosotros/nosotros.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'jardin', component: ListadoJardinComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
   { path: 'panelAcudiente', component: PanelAcudienteComponent, canActivate: [AuthGuard], data: { roles: ['acudiente'] } },
   { path: 'panel-docente', component: PanelDocenteComponent, canActivate: [AuthGuard], data: { roles: ['docente'] } },
+  { path: 'listadoCurso', component: ListadoCursoComponent, canActivate: [AuthGuard], data: { roles: ['docente'] } },
 ];
 
 @NgModule({
