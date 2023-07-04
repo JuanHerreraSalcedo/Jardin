@@ -14,6 +14,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userName: string;
   private userRoleSubscription: Subscription;
 
+  menuOpen = false;
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+
   constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn = false;
     this.rol = '';

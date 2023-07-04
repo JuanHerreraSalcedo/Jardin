@@ -1,39 +1,78 @@
 .whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}.whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999; /* Esto establece la capa de nivel superior para que el botón flotante aparezca por encima de otros elementos en la página */
-  }
-  
-  /* Esto alinea el botón de WhatsApp a la derecha y le da un margen derecho de 20 píxeles */
-  .whatsapp-button a {
-    display: block;
-    float: right;
-    margin-right: 20px;
-  }
-  
-  @media screen and (max-width: 767px) {
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      max-width: 80%; /* Limita el ancho máximo del botón de WhatsApp para evitar desbordamientos */
-      overflow: hidden; /* Oculta cualquier contenido que se desborde del botón */
-      white-space: nowrap; /* Evita que el texto dentro del botón se divida en varias líneas */
-      text-align: right;
-    }
-    
-    .whatsapp-button a {
-      display: inline-block;
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-    
-    }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
 
-  
+.whatsapp-button::before,
+.whatsapp-button::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #25D366;
+  opacity: 0;
+  animation: onda 1.7s infinite;
+}
+
+.whatsapp-button::before {
+  animation-delay: 1s;
+}
+
+.whatsapp-button::after {
+  animation-delay: 1.3s;
+}
+
+.whatsapp-button img {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes onda {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+/* Esto alinea el botón de WhatsApp a la derecha y le da un margen derecho de 20 píxeles */
+.whatsapp-button a {
+  display: block;
+  float: right;
+  margin-right: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+    animation: none;
+  }
+
+  .whatsapp-button a {
+    display: inline-block;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .whatsapp-button::before,
+  .whatsapp-button::after {
+    content: none;
+  }
+}

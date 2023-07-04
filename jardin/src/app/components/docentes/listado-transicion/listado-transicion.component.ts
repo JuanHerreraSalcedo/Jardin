@@ -11,8 +11,11 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./listado-transicion.component.scss']
 })
 export class ListadoTransicionComponent implements OnInit {
-  estudiantes!: any[];
+  estudiantes: any[] = [];
+  estudiantesPaginados: any[] = [];
   buscarEstudiante: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 15; // Actualiza el número máximo de registros por página
 
   constructor(
     private firestore: AngularFirestore,
@@ -26,11 +29,13 @@ export class ListadoTransicionComponent implements OnInit {
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;
         this.sortEstudiantesAlfabeticamente(); // Ordenar estudiantes alfabéticamente
-        this.filtrarEstudiantes(); // Filtrar estudiantes según criterio de búsqueda
+        this.paginarEstudiantes(); // Paginar estudiantes
       });
   }
 
   filtrarEstudiantes(): void {
+    this.currentPage = 1; // Reiniciar la página actual al realizar una búsqueda
+
     if (this.buscarEstudiante.trim() !== '') {
       const criterio = this.buscarEstudiante.toLowerCase().trim();
       this.estudiantes = this.estudiantes.filter((estudiante) => {
@@ -45,10 +50,21 @@ export class ListadoTransicionComponent implements OnInit {
         .subscribe((estudiantes) => {
           this.estudiantes = estudiantes;
           this.sortEstudiantesAlfabeticamente(); // Ordenar estudiantes alfabéticamente
+          this.paginarEstudiantes(); // Paginar estudiantes
         });
     }
   }
-  
+
+  paginarEstudiantes(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.estudiantesPaginados = this.estudiantes.slice(startIndex, endIndex);
+  }
+
+  cambiarPagina(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.paginarEstudiantes();
+  }
 
   getFotoUrl(fotoPath: string): Observable<string | null> {
     const ref = this.storage.ref(fotoPath);
@@ -83,5 +99,9 @@ export class ListadoTransicionComponent implements OnInit {
       }
       return 0;
     });
+  }
+
+  getTotalPages(): number[] {
+    return Array(Math.ceil(this.estudiantes.length / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
   }
 }
