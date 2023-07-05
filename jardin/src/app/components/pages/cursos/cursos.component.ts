@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class CursosComponent implements OnInit {
   mostrarDatosInvisibles = false;
+  mostrarDocentesInvisibles = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -56,5 +57,8 @@ export class CursosComponent implements OnInit {
   }
   mostrarDatos() {
     this.mostrarDatosInvisibles = !this.mostrarDatosInvisibles;
+  }
+  mostrarDocentes() {
+    this.mostrarDocentesInvisibles = !this.mostrarDocentesInvisibles;
   }
 }
