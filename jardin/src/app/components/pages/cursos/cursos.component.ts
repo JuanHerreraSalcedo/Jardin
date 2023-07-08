@@ -57,8 +57,16 @@ export class CursosComponent implements OnInit {
   }
   mostrarDatos() {
     this.mostrarDatosInvisibles = !this.mostrarDatosInvisibles;
+    if (this.mostrarDatosInvisibles) {
+      this.mostrarDocentesInvisibles = false; // Cerrar el otro panel si está abierto
+    }
   }
+  
   mostrarDocentes() {
     this.mostrarDocentesInvisibles = !this.mostrarDocentesInvisibles;
+    if (this.mostrarDocentesInvisibles) {
+      this.mostrarDatosInvisibles = false; // Cerrar el otro panel si está abierto
+    }
   }
+  
 }

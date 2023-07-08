@@ -1,78 +1,78 @@
 <div class="container-fluid g-0 p-2">
-
     <div class="row g-0">
-        <div class="col-md-2 d-flex justify-content-center align-items-center">
-            <img src="../../../../assets/img/logo.png" alt="" class="profile">
-        </div>
-
-        <div class="col ps-2">
-
-            <div class="row g-0">
-
-                <div class="col-md-10 text-center">
-                    <span class="name">Juan</span>
-                </div>
-
-                <div class="col-md-2 d-flex justify-content-center align-items-center">
+      <div class="col-md-12" *ngFor="let usuario of usuarios">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-2 d-flex justify-content-center align-items-center">
+                <img src="../../../../assets/img/logo.png" alt="" class="profile">
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h4 class="name">{{ usuario.nombre }} {{ usuario.apellido }}</h4>
+                  </div>
+                  <div class="col-md-4 text-end">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-outline-success">Editar</button>
-                        <button type="button" class="btn btn-outline-danger">Borrar</button>
+                        <button type="button" class="btn btn-outline-success" (click)="editarDocente(usuario.id)">Editar</button>
+                      <button type="button" class="btn btn-outline-danger" (click)="borrarDocente(usuario.id)">Borrar</button>
                     </div>
+                  </div>
                 </div>
-
-            </div>
-
-            <div class="row g-0 mt-3">
-                <div class="col-md">
-                    <table class="table table-hover mx-auto">
-                        <thead class="text-center fs-5 fst-italic text-secondary">
-                            <tr>
-                                <td colspan="2">Detalles personales</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Fecha de nacimiento</td>
-                                <td>05/05/2000</td>
-                            </tr>
-                            <tr>
-                                <td>Género</td>
-                                <td>Masculino</td>
-                            </tr>
-                            <tr>
-                                <td>Experiencia laboral</td>
-                                <td>1 año</td>
-                            </tr>
-                        </tbody>
+                <div class="row mt-3">
+                  <div class="col-md">
+                    <table class="table table-hover">
+                      <thead class="text-center fs-5 fst-italic text-secondary">
+                        <tr>
+                          <td colspan="2">Detalles personales</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Fecha de nacimiento</td>
+                          <td>{{ usuario.fechaNacimiento }}</td>
+                        </tr>
+                        <tr>
+                          <td>Género</td>
+                          <td>{{ usuario.genero }}</td>
+                        </tr>
+                        <tr>
+                          <td>Experiencia laboral</td>
+                          <td>{{ usuario.experiencia }} años</td>
+                        </tr>
+                      </tbody>
                     </table>
-                </div>
-            
-                <div class="col-md">
-                    <table class="table table-hover mx-auto">
-                        <thead class="text-center fs-5 fst-italic text-secondary">
-                            <tr>
-                                <td colspan="2">Detalles del trabajo</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Jardín</td>
-                                <td>Oso Meloso</td>
-                            </tr>
-                            <tr>
-                                <td>Curso</td>
-                                <td>Parvulos</td>
-                            </tr>
-                            <tr>
-                                <td>Salario</td>
-                                <td>$4,000,000</td>
-                            </tr>
-                        </tbody>
+                  </div>
+                  <div class="col-md">
+                    <table class="table table-hover">
+                      <thead class="text-center fs-5 fst-italic text-secondary">
+                        <tr>
+                          <td colspan="2">Detalles del trabajo</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Jardín</td>
+                          <td>{{ usuario.escuela }}</td>
+                        </tr>
+                        <tr>
+                          <td>Curso</td>
+                          <td>{{ usuario.curso }}</td>
+                        </tr>
+                        <tr>
+                          <td>Salario</td>
+                          <td>{{ usuario.salario }}</td>
+                        </tr>
+                      </tbody>
                     </table>
+                  </div>
                 </div>
+              </div>
             </div>
-            
-
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  
+  

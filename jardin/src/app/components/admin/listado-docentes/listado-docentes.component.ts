@@ -18,13 +18,58 @@ export class ListadoDocentesComponent implements OnInit {
   }
 
   obtenerDocentes(): void {
-    this.firestore.collection('usuarios', ref => ref.where('rol', '==', 'docente')).valueChanges().subscribe(
-      (docentes: any[]) => {
-        this.usuarios = docentes;
-      },
-      (error) => {
+    this.firestore.collection('usuarios').ref
+      .where('rol', '==', 'docente')
+      .get()
+      .then((querySnapshot) => {
+        const uniqueDocentes: any[] = [];
+        querySnapshot.forEach((doc: any) => { // Especificar el tipo 'any' para la variable 'doc'
+          const docente = { id: doc.id, ...doc.data() };
+          if (!uniqueDocentes.some((d) => d.id === docente.id)) {
+            uniqueDocentes.push(docente);
+          }
+        });
+        this.usuarios = uniqueDocentes;
+      })
+      .catch((error) => {
         console.error('Error al obtener los docentes:', error);
+      });
+  }
+
+  borrarDocente(docenteId: string): void {
+    this.firestore.collection('usuarios').doc(docenteId)
+      .delete()
+      .then(() => {
+        console.log('Docente eliminado correctamente');
+        // Realiza las acciones necesarias después de borrar el docente
+      })
+      .catch((error) => {
+        console.error('Error al borrar el docente:', error);
+      });
+  }
+
+  editarDocente(docenteId: string): void {
+    this.firestore.collection('usuarios').doc(docenteId).get().subscribe((doc: any) => {
+      if (doc.exists) {
+        const docente = { id: doc.id, ...doc.data() };
+
+        // Mostrar los datos del docente en un formulario de edición
+        // Puedes utilizar un modal o cualquier otro componente para el formulario de edición
+
+        // Aquí debes implementar la lógica para abrir el formulario de edición y pasar los datos del docente
+
+        // Una vez que se realicen los cambios en el formulario y se guarden, actualizar los datos en Firestore
+        this.firestore.collection('usuarios').doc(docenteId).update(docente)
+          .then(() => {
+            console.log('Docente actualizado correctamente');
+            // Realiza las acciones necesarias después de actualizar el docente
+          })
+          .catch((error) => {
+            console.error('Error al actualizar el docente:', error);
+          });
+      } else {
+        console.log('No se encontró el docente con el ID:', docenteId);
       }
-    );
+    });
   }
 }
