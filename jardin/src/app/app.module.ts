@@ -40,6 +40,11 @@ import { ListadoTransicionComponent } from './components/docentes/listado-transi
 import { ListadoPrejardinComponent } from './components/docentes/listado-prejardin/listado-prejardin.component';
 import { ListadoJardinComponent } from './components/docentes/listado-jardin/listado-jardin.component';
 import { ListadoCursoComponent } from './components/listado-curso/listado-curso.component';
+
+//calendario  
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,13 +76,15 @@ import { ListadoCursoComponent } from './components/listado-curso/listado-curso.
     ListadoTransicionComponent,
     ListadoPrejardinComponent,
     ListadoJardinComponent,
-    ListadoCursoComponent
+    ListadoCursoComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    FullCalendarModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
