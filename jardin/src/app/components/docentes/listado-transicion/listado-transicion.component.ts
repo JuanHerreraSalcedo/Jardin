@@ -28,7 +28,7 @@ export class ListadoTransicionComponent implements OnInit {
 
   obtenerEstudiantes(): void {
     this.firestore
-      .collection('estudiantes', (ref) => ref.where('curso', '==', 'transición'))
+      .collection('estudiantes', (ref) => ref.where('curso', '==', 'Transición'))
       .valueChanges()
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;
