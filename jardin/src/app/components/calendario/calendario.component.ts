@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import esLocale from '@fullcalendar/core/locales/es';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
 
@@ -13,8 +14,12 @@ export class CalendarioComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
-    events: []
+    events: [],
+    eventColor: '#FF0000', // Cambia el color de las etiquetas a rojo
+    locale: esLocale, // Establece el calendario en español
+    timeZone: 'local' // Utiliza la zona horaria local del navegador
   };
+  
 
   eventsPromise!: Observable<EventInput[]>;
   nuevoEvento: any = {};
@@ -26,15 +31,21 @@ export class CalendarioComponent implements OnInit {
   }
 
   cargarEventos(): Observable<EventInput[]> {
-    return this.firestore.collection('eventos').valueChanges()
-      .pipe(map((eventos: any[]) => {
-        return eventos.map(evento => ({
-          title: evento.titulo,
-          start: new Date(evento.fechaInicio),
-          end: new Date(evento.fechaFin)
-        }));
+    return this.firestore.collection('eventos').snapshotChanges()
+      .pipe(map((snapshots: any[]) => {
+        return snapshots.map(snapshot => {
+          const evento = snapshot.payload.doc.data();
+          const fechaInicio = evento.fechaInicio instanceof Date ? evento.fechaInicio : new Date(evento.fechaInicio);
+          const fechaFin = evento.fechaFin instanceof Date ? evento.fechaFin : new Date(evento.fechaFin);
+          return {
+            title: evento.titulo,
+            start: fechaInicio,
+            end: fechaFin
+          };
+        });
       }));
   }
+  
 
   handleEventClick(arg: any) {
     // Lógica para manejar el clic en un evento
