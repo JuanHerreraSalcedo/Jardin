@@ -46,7 +46,7 @@ export class IniciarSesionComponent implements OnInit {
       this.authService.getUserRole().subscribe((rol: string) => {
         if (rol === 'docente') {
           this.router.navigate(['/calendario']);
-        } else if (rol === 'acudiente') {
+        } else if (rol === 'Acudiente') {
           this.router.navigate(['/panelAcudiente']);
         } else {
           this.router.navigate(['/registro-docente']);

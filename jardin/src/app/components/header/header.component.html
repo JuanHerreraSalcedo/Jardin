@@ -1,5 +1,5 @@
 <!-- Header principal -->
-<div class="desktop-header" *ngIf="!isLoggedIn || (rol !== 'admin' && rol !== 'docente' && rol !== 'acudiente')">
+<div class="desktop-header" *ngIf="!isLoggedIn || (rol !== 'admin' && rol !== 'docente' && rol !== 'Acudiente')">
   <!-- Contenido del header para usuarios no autenticados o roles no especificados -->
   <div class="scroll">
     <nav class="navbar navbar-expand-lg navbar-transparent mb-1 d-lg-block d-none">
@@ -123,6 +123,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" routerLink="/calendario">Calendario</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="/correos">Dirigenciar correo</a>
+              </li>
             </ul>
             <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
           </div>
@@ -135,16 +138,16 @@
 
 
 <!-- Header para acudiente -->
-<div class="desktop-header" *ngIf="isLoggedIn && rol === 'acudiente'">
+<div class="desktop-header-acudiente d-lg-block d-none" *ngIf="isLoggedIn && rol === 'Acudiente'">
   <!-- Contenido del header para el rol de acudiente -->
   <div class="scroll">
-    <nav class="navbar navbar-dark bg-secundary fixed-top">
+    <nav class="navbar navbar-dark bg-warning fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand">{{ userName }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" data-bs-backdrop="false">
+        <div class="offcanvas offcanvas-end text-bg-warning" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" data-bs-backdrop="false">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -185,15 +188,14 @@
 
 
 <!-- Header para vista móvil -->
-<div class="mobile-header" *ngIf="!isLoggedIn || (rol !== 'admin' && rol !== 'docente' && rol !== 'acudiente')">
+<div class="mobile-header" *ngIf="!isLoggedIn || (rol !== 'admin' && rol !== 'docente' && rol !== 'Acudiente')">
   <!-- Contenido del header para usuarios no autenticados o roles no especificados -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile"
-        aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" (click)="toggleMenu()" [class.collapsed]="!menuOpen">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavMobile">
+      <div class="collapse navbar-collapse" [class.show]="menuOpen">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
@@ -239,19 +241,16 @@
           </li>
           <!-- Agrega aquí los enlaces específicos para el rol de admin en la versión móvil -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/parvulos">Listado Parvulos</a>
+            <a class="nav-link" routerLink="/parvulos">Listado Párvulos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/transicion">Listado Transicion</a>
+            <a class="nav-link" routerLink="/transicion">Listado Transición</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/prejardin">Listado Prejardin</a>
+            <a class="nav-link" routerLink="/prejardin">Listado Prejardín</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/jardin">Listado Jardin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/jardin">Listado Jardin</a>
+            <a class="nav-link" routerLink="/jardin">Listado Jardín</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="">Diligenciar correos</a>
@@ -271,18 +270,19 @@
   <!-- Contenido del header para el rol de docente en la versión móvil -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileDocente"
-        aria-controls="navbarNavMobileDocente" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" (click)="toggleMenu()" [ngClass]="{'active': menuOpen}">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavMobileDocente">
+      <div class="collapse navbar-collapse" id="navbarNavMobileDocente"  [ngClass]="{'show': menuOpen}">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
+            <a class="nav-link active" aria-current="page" routerLink="/listadoCurso">Mi curso</a>
           </li>
-          <!-- Agrega aquí los enlaces específicos para el rol de docente en la versión móvil -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="dashboard">Panel de docente</a>
+            <a class="nav-link active" aria-current="page" routerLink="/calendario">Calendario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/correos">Dirigenciar correo</a>
           </li>
         </ul>
       </div>
@@ -292,15 +292,14 @@
 
 
 <!-- Header para vista móvil - acudiente -->
-<div class="mobile-header" *ngIf="isLoggedIn && rol === 'acudiente'">
+<div class="mobile-header" *ngIf="isLoggedIn && rol === 'Acudiente'">
   <!-- Contenido del header para el rol de acudiente en la versión móvil -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1 d-block d-lg-none">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileAcudiente"
-        aria-controls="navbarNavMobileAcudiente" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" (click)="toggleMenu()" [ngClass]="{'active': menuOpen}">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavMobileAcudiente">
+      <div class="collapse navbar-collapse" id="navbarNavMobileAcudiente" [ngClass]="{'show': menuOpen}">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>

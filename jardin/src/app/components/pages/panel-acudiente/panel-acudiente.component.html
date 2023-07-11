@@ -1,32 +1,31 @@
-<div *ngIf="usuarios">
-    <h2>Datos del Usuario</h2>
-    <ng-container *ngFor="let usuario of usuarios">
-      <form>
-        <div>
-          <label>Nombre: </label>
-          <input type="text" [(ngModel)]="usuario.nombres" name="nombre" disabled>
-        </div>
-        <div>
-          <label>Apellido: </label>
-          <input type="text" [(ngModel)]="usuario.apellidos" name="apellido" disabled>
-        </div>
-        <div>
-          <label>Cédula del acudiente: </label>
-          <input type="text" [(ngModel)]="usuario.cedula" name="cedula" disabled>
-        </div>
-        <div>
-          <label>Dirección: </label>
-          <input type="text" [(ngModel)]="usuario.direccion" name="direccion" disabled>
-        </div>
-        <div>
-          <label>Curso: </label>
-          <input type="email" [(ngModel)]="usuario.curso" name="curso" disabled>
-        </div>
-        <div>
-          <label>Rol: </label>
-          <input type="text" [(ngModel)]="usuario.rol" name="rol" disabled>
-        </div>
-      </form>
-    </ng-container>
+<div class="container">
+  <div *ngIf="usuarios">
+      <h2>Datos del Usuario</h2>
+      <ng-container *ngFor="let usuario of usuarios">
+        <form>
+          <div>
+            <label>Nombre: </label>
+            <input type="text" [(ngModel)]="usuario.nombres" name="nombre" disabled>
+          </div>
+          <div>
+            <label>Apellido: </label>
+            <input type="text" [(ngModel)]="usuario.apellidos" name="apellido" disabled>
+          </div>
+          <div>
+            <label>Cédula del acudiente: </label>
+            <input type="text" [(ngModel)]="usuario.cedula" name="cedula" disabled>
+          </div>
+          <div>
+            <label>Dirección: </label>
+            <input type="text" [(ngModel)]="usuario.direccion" name="direccion" disabled>
+          </div>
+          <div>
+            <label>Curso: </label>
+            <input type="email" [(ngModel)]="usuario.curso" name="curso" disabled>
+          </div>
+        </form>
+      </ng-container>
   </div>
+
+</div>
   
