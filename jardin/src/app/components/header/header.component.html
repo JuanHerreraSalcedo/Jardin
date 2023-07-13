@@ -86,8 +86,6 @@
           {{ userName }}
         </button>
         <div class="dropdown-menu">
-          <!-- Aquí puedes agregar más elementos del menú desplegable si es necesario -->
-          <button class="dropdown-item">Perfil</button>
           <button class="dropdown-item" (click)="logout()">Cerrar sesión</button>
         </div>
       </div>
@@ -141,15 +139,14 @@
 <div class="desktop-header-acudiente d-lg-block d-none" *ngIf="isLoggedIn && rol === 'Acudiente'">
   <!-- Contenido del header para el rol de acudiente -->
   <div class="scroll">
-    <nav class="navbar navbar-dark bg-warning fixed-top">
+    <nav class="navbar navbar-dark header-acudiente fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand">{{ userName }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end text-bg-warning" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" data-bs-backdrop="false">
+        <div class="offcanvas offcanvas-end header-acudiente" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" data-bs-backdrop="false">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
