@@ -43,10 +43,37 @@
             </div>
           </div>
         </div>
+
+        <h4 class="name">Reportes del estudiante {{ usuario.nombres }} {{ usuario.apellidos }}</h4>
+        <table class="table table-striped mb-5">
+          <thead>
+            <tr>
+              <th>Desempeño</th>
+              <th>Comportamiento</th>
+              <th>Participación</th>
+              <th>Creatividad</th>
+              <th>Asistencia</th>
+              <th>Comio</th>
+              <th>Observaciones</th>
+              <th>Fecha del reporte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reporte of usuario.reportes">
+              <td>{{ reporte.desempenio }}</td>
+              <td>{{ reporte.comportamiento }}</td>
+              <td>{{ reporte.participacion }}</td>
+              <td>{{ reporte.creatividad }}</td>
+              <td>{{ reporte.asistencia }}</td>
+              <td>{{ reporte.comio }}</td>
+              <td>{{ reporte.observaciones }}</td>
+              <td>{{ reporte.fechaReporte }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr>
       </div>
     </div>
   </div>
 </div>
-  
-
-

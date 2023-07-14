@@ -17,6 +17,16 @@ export class ListadoCursoComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 15; // Actualiza el número máximo de registros por página
   cursoDocente: string = ''; // Variable para almacenar el curso del docente
+  estudianteSeleccionado: any = null; // Variable para almacenar el estudiante seleccionado
+
+  desempenio: string = '';
+  comportamiento: string = '';
+  participacion: string = '';
+  creatividad: string = '';
+  asistencia: string = '';
+  comio: string = '';
+  observaciones: string = '';
+  fechaReporte: string = '';
 
   constructor(
     private auth: AngularFireAuth,
@@ -48,7 +58,6 @@ export class ListadoCursoComponent implements OnInit {
       }
     });
   }
-  
 
   obtenerEstudiantes(): void {
     this.firestore
@@ -124,5 +133,63 @@ export class ListadoCursoComponent implements OnInit {
     return Array(Math.ceil(this.estudiantes.length / this.itemsPerPage))
       .fill(0)
       .map((x, i) => i + 1);
+  }
+
+  seleccionarEstudiante(estudiante: any) {
+    this.estudianteSeleccionado = estudiante;
+  }
+
+  registrarReporte() {
+    // Verificar si el usuario está autenticado
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        // Utilizar los datos del estudiante seleccionado y otros valores del formulario para guardar el reporte
+        const reporte = {
+          estudianteId: this.estudianteSeleccionado.id, // Agregar el ID del estudiante correspondiente
+          desempenio: this.desempenio, // Agregar el valor de los radio buttons y otros campos del formulario
+          comportamiento: this.comportamiento,
+          participacion: this.participacion,
+          creatividad: this.creatividad,
+          asistencia: this.asistencia,
+          comio: this.comio,
+          observaciones: this.observaciones,
+          fechaReporte: this.fechaReporte,
+          usuarioId: user.uid // Agregar el ID del usuario autenticado
+        };
+
+        console.log('Datos del estudiante seleccionado:', this.estudianteSeleccionado); // Agrega esta línea
+        console.log('Datos del reporte:', reporte); // Agrega esta línea
+
+        // Guardar el reporte en la colección "reportes"
+        this.firestore
+          .collection('reportes')
+          .add(reporte)
+          .then(() => {
+            console.log('Reporte guardado exitosamente');
+            // Aquí puedes agregar lógica adicional si se desea realizar alguna acción después de guardar el reporte
+            this.cerrarModal();
+          })
+          .catch((error) => {
+            console.error('Error al guardar el reporte:', error);
+            // Manejar el error en caso de fallo al guardar el reporte
+          });
+      } else {
+        console.log('El usuario no está autenticado');
+        // Manejar el caso cuando el usuario no está autenticado
+      }
+    });
+  }
+
+  cerrarModal() {
+    this.estudianteSeleccionado = null;
+    // Restablecer los valores de los radio buttons y otros campos del formulario
+    this.desempenio = '';
+    this.comportamiento = '';
+    this.participacion = '';
+    this.creatividad = '';
+    this.asistencia = '';
+    this.comio = '';
+    this.observaciones = '';
+    this.fechaReporte = '';
   }
 }
