@@ -33,6 +33,9 @@ export class PanelAcudienteComponent implements OnInit {
                 .valueChanges().subscribe((estudiantes) => {
                   if (estudiantes.length > 0) {
                     this.usuarios = estudiantes;
+
+                    // Obtener los reportes de cada estudiante
+                    this.obtenerReportes(estudiantes);
                   } else {
                     console.log('No se encontraron datos de los estudiantes');
                   }
@@ -42,6 +45,17 @@ export class PanelAcudienteComponent implements OnInit {
             }
           });
       }
+    });
+  }
+
+  obtenerReportes(estudiantes: any[]): void {
+    estudiantes.forEach((estudiante) => {
+      const estudianteId = estudiante.id;
+
+      this.firestore.collection('reportes', ref => ref.where('estudianteId', '==', estudianteId))
+        .valueChanges().subscribe((reportes) => {
+          estudiante.reportes = reportes;
+        });
     });
   }
 
