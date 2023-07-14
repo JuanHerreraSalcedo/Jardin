@@ -109,7 +109,6 @@
         </button>
         <div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" data-bs-backdrop="false">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
@@ -152,26 +151,10 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" routerLink="panelAcudiente">Tablas de información</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Perfil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <a class="nav-link active" aria-current="page" routerLink="calendario">Calendario</a>
               </li>
             </ul>
             <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
@@ -301,10 +284,14 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="home">Inicio</a>
           </li>
-          <!-- Agrega aquí los enlaces específicos para el rol de acudiente en la versión móvil -->
-          <li class="nav-item">
-            <a class="nav-link" routerLink="dashboard">Panel de acudiente</a>
-          </li>
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="panelAcudiente">Tablas de información</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="calendario">Calendario</a>
+            </li>
+          </ul>
         </ul>
       </div>
     </div>
