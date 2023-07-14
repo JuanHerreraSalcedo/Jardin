@@ -1,72 +1,266 @@
 <div class="container">
-    <div class="d-md-flex justify-content-between mb-3">
-      <div class="form-group">
-        <input type="text" class="form-control" id="buscarEstudiante" [(ngModel)]="buscarEstudiante" (input)="filtrarEstudiantes()" placeholder="Buscar estudiante">
-      </div>
-      <div class="mt-3 mt-md-0">
-        <button class="btn btn-dark" (click)="descargarLista()">
-          <i class="fa-solid fa-download" style="color: #ffffff;"></i>Descargar lista
-        </button>
-      </div>
+  <div class="d-md-flex justify-content-between mb-3">
+    <div class="form-group">
+      <input type="text" class="form-control" id="buscarEstudiante" [(ngModel)]="buscarEstudiante" (input)="filtrarEstudiantes()" placeholder="Buscar estudiante">
     </div>
-    <div class="table-responsive">
-      <table class="table table-striped align-middle mb-0 bg-white">
-        <thead class="bg-light">
-          <tr>
-            <th>Nombre</th>
-            <th>Curso</th>
-            <th>Ciudad</th>
-            <th>Edad</th>
-            <th>Fecha de nacimiento</th>
-            <th>Teléfono</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let estudiante of estudiantesPaginados">
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="ms-3">
-                  <p class="fw-bold mb-1">{{ estudiante.apellidos }} {{ estudiante.nombres }}</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p class="fw-normal mb-1">{{ estudiante.curso }}</p>
-            </td>
-            <td>
-              <p class="text-muted mb-0">{{ estudiante.ciudad }}</p>
-            </td>
-            <td>
-              <p class="fw-normal mb-1">{{ estudiante.edad }}</p>
-            </td>
-            <td>
-              <p class="fw-normal mb-1">{{ estudiante.fechaNacimiento }}</p>
-            </td>
-            <td>
-              <p class="fw-normal mb-1">{{ estudiante.telefono }}</p>
-            </td>
-            <td>
-              <button type="button" class="btn btn-link btn-sm btn-rounded">
-                Editar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="mt-3 mt-md-0">
+      <button class="btn btn-dark" (click)="descargarLista()">
+        <i class="fa-solid fa-download" style="color: #ffffff;"></i>Descargar lista
+      </button>
     </div>
-    <nav aria-label="Pagination" class="pagination">
-      <ul class="pagination">
-        <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true" (click)="cambiarPagina(currentPage - 1)">Previous</a>
-        </li>
-        <li class="page-item" *ngFor="let page of getTotalPages()" [ngClass]="{ active: page === currentPage }">
-          <a class="page-link" href="#" (click)="cambiarPagina(page)">{{ page }}</a>
-        </li>
-        <li class="page-item" [ngClass]="{ disabled: currentPage === getTotalPages().length }">
-          <a class="page-link" href="#" (click)="cambiarPagina(currentPage + 1)">Next</a>
-        </li>
-      </ul>
-    </nav>
   </div>
-  
+  <div class="table-responsive">
+    <table class="table table-striped align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Curso</th>
+          <th>Ciudad</th>
+          <th>Edad</th>
+          <th>Fecha de nacimiento</th>
+          <th>Teléfono</th>
+          <th>Reportes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estudiante of estudiantesPaginados">
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{ estudiante.apellidos }} {{ estudiante.nombres }}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.curso }}</p>
+          </td>
+          <td>
+            <p class="text-muted mb-0">{{ estudiante.ciudad }}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.edad }}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.fechaNacimiento }}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.telefono }}</p>
+          </td>
+          <td>
+            <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="seleccionarEstudiante(estudiante)">Realizar reporte</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <nav aria-label="Pagination" class="pagination">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true" (click)="cambiarPagina(currentPage - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of getTotalPages()" [ngClass]="{ active: page === currentPage }">
+        <a class="page-link" href="#" (click)="cambiarPagina(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: currentPage === getTotalPages().length }">
+        <a class="page-link" href="#" (click)="cambiarPagina(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro del comportamiento del estudiante</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="registrarReporte()">
+          <div class="row">
+            <label for="">Desempeño</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="desempenio" id="desempenio1" value="1" [(ngModel)]="desempenio" />
+                <label class="form-check-label" for="desempenio1">1</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="desempenio" id="desempenio2" value="2" [(ngModel)]="desempenio" />
+                <label class="form-check-label" for="desempenio2">2</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="desempenio" id="desempenio3" value="3" [(ngModel)]="desempenio" />
+                <label class="form-check-label" for="desempenio3">3</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="desempenio" id="desempenio4" value="4" [(ngModel)]="desempenio" />
+                <label class="form-check-label" for="desempenio4">4</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="desempenio" id="desempenio5" value="5" [(ngModel)]="desempenio" />
+                <label class="form-check-label" for="desempenio5">5</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label for="">Comportamiento</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comportamiento" id="comportamiento1" value="1" [(ngModel)]="comportamiento" />
+                <label class="form-check-label" for="comportamiento1">1</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comportamiento" id="comportamiento2" value="2" [(ngModel)]="comportamiento" />
+                <label class="form-check-label" for="comportamiento2">2</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comportamiento" id="comportamiento3" value="3" [(ngModel)]="comportamiento" />
+                <label class="form-check-label" for="comportamiento3">3</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comportamiento" id="comportamiento4" value="4" [(ngModel)]="comportamiento" />
+                <label class="form-check-label" for="comportamiento4">4</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comportamiento" id="comportamiento5" value="5" [(ngModel)]="comportamiento" />
+                <label class="form-check-label" for="comportamiento5">5</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label for="">Participación</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="participacion" id="participacion1" value="1" [(ngModel)]="participacion" />
+                <label class="form-check-label" for="participacion1">1</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="participacion" id="participacion2" value="2" [(ngModel)]="participacion" />
+                <label class="form-check-label" for="participacion2">2</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="participacion" id="participacion3" value="3" [(ngModel)]="participacion" />
+                <label class="form-check-label" for="participacion3">3</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="participacion" id="participacion4" value="4" [(ngModel)]="participacion" />
+                <label class="form-check-label" for="participacion4">4</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="participacion" id="participacion5" value="5" [(ngModel)]="participacion" />
+                <label class="form-check-label" for="participacion5">5</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label for="">Creatividad</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="creatividad" id="creatividad1" value="1" [(ngModel)]="creatividad" />
+                <label class="form-check-label" for="creatividad1">1</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="creatividad" id="creatividad2" value="2" [(ngModel)]="creatividad" />
+                <label class="form-check-label" for="creatividad2">2</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="creatividad" id="creatividad3" value="3" [(ngModel)]="creatividad" />
+                <label class="form-check-label" for="creatividad3">3</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="creatividad" id="creatividad4" value="4" [(ngModel)]="creatividad" />
+                <label class="form-check-label" for="creatividad4">4</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="creatividad" id="creatividad5" value="5" [(ngModel)]="creatividad" />
+                <label class="form-check-label" for="creatividad5">5</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label for="">Asistencia</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="asistencia" id="asistencia1" value="1" [(ngModel)]="asistencia" />
+                <label class="form-check-label" for="asistencia1">1</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="asistencia" id="asistencia2" value="2" [(ngModel)]="asistencia" />
+                <label class="form-check-label" for="asistencia2">2</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="asistencia" id="asistencia3" value="3" [(ngModel)]="asistencia" />
+                <label class="form-check-label" for="asistencia3">3</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="asistencia" id="asistencia4" value="4" [(ngModel)]="asistencia" />
+                <label class="form-check-label" for="asistencia4">4</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="asistencia" id="asistencia5" value="5" [(ngModel)]="asistencia" />
+                <label class="form-check-label" for="asistencia5">5</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label for="">Comió</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comio" id="comioSi" value="Si" [(ngModel)]="comio" />
+                <label class="form-check-label" for="comioSi">Si</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="comio" id="comioNo" value="No" [(ngModel)]="comio" />
+                <label class="form-check-label" for="comioNo">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label for="">Observaciones</label>
+            <textarea class="form-control" name="observaciones" [(ngModel)]="observaciones"></textarea>
+          </div>
+
+          <div class="mb-2">
+            <label for="fechaReporte" class="form-label">Fecha del reporte</label>
+            <input type="date" class="form-control" id="fechaReporte" name="fechaReporte" [(ngModel)]="fechaReporte" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
