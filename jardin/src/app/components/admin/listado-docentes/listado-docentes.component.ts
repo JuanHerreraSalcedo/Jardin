@@ -14,7 +14,9 @@ export class ListadoDocentesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtenerDocentes();
+    if (this.usuarios.length === 0) {
+      this.obtenerDocentes();
+    }
   }
 
   obtenerDocentes(): void {
