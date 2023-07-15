@@ -42,7 +42,7 @@ export class RegistroDocenteComponent implements OnInit {
       curso: ['', Validators.required],
       fotoPerfil: [null],
       escuela: ['', Validators.required],
-      años: ['', Validators.required],
+      anios: ['', Validators.required],
       salario: ['', Validators.required],
     });
   }
@@ -75,7 +75,7 @@ export class RegistroDocenteComponent implements OnInit {
       const curso = this.mapCursoValue(this.registrarUsuario.value.curso);
       const fotoPerfil = this.registrarUsuario.value.fotoPerfil;
       const escuela = this.registrarUsuario.value.escuela;
-      const años = this.registrarUsuario.value.años;
+      const anios = this.registrarUsuario.value.anios;
       const salario = this.registrarUsuario.value.salario;
 
       if (contraseña !== repetirContraseña) {
@@ -96,7 +96,7 @@ export class RegistroDocenteComponent implements OnInit {
           curso: curso,
           fotoPerfil: fotoPerfil,
           escuela: escuela,
-          años: años,
+          anios: anios,
           salario: salario
         });
 

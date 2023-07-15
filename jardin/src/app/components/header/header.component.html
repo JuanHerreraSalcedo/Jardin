@@ -238,6 +238,8 @@
           <li class="nav-item">
             <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones</a>
           </li>
+
+          <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
         </ul>
       </div>
     </div>
@@ -265,6 +267,7 @@
             <a class="nav-link active" aria-current="page" routerLink="/correos">Dirigenciar correo</a>
           </li>
         </ul>
+        <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
       </div>
     </div>
   </nav>
@@ -292,6 +295,7 @@
               <a class="nav-link active" aria-current="page" routerLink="calendario">Calendario</a>
             </li>
           </ul>
+          <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
         </ul>
       </div>
     </div>

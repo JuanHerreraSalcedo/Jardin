@@ -28,6 +28,8 @@ export class ListadoCursoComponent implements OnInit {
   observaciones: string = '';
   fechaReporte: string = '';
 
+  acudienteCorreo: string = ''; // Variable para almacenar el correo del acudiente
+
   constructor(
     private auth: AngularFireAuth,
     private firestore: AngularFirestore
@@ -66,8 +68,26 @@ export class ListadoCursoComponent implements OnInit {
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;
         this.sortEstudiantesAlfabeticamente(); // Ordenar estudiantes alfabéticamente
+        this.obtenerCorreosAcudientes(); // Obtener los correos de los acudientes correspondientes a los estudiantes
         this.paginarEstudiantes(); // Paginar estudiantes
       });
+  }
+
+  obtenerCorreosAcudientes(): void {
+    this.estudiantes.forEach((estudiante) => {
+      const cedulaEstudiante = estudiante.cedula;
+      this.firestore
+        .collection('usuarios', (ref) => ref.where('cedula', '==', cedulaEstudiante).limit(1))
+        .valueChanges()
+        .subscribe((usuarios: any[]) => {
+          if (usuarios && usuarios.length > 0) {
+            const acudiente = usuarios[0];
+            estudiante.correoAcudiente = acudiente.correo; // Agregar el correo del acudiente al objeto del estudiante
+          } else {
+            estudiante.correoAcudiente = 'No disponible'; // Manejar el caso si no se encuentra el acudiente
+          }
+        });
+    });
   }
 
   filtrarEstudiantes(): void {
