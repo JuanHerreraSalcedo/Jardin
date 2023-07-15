@@ -24,6 +24,7 @@ export class RegistroDocenteComponent implements OnInit {
   registrarUsuario: FormGroup;
   docente: any[] = [];
   docenteToDisplay: any[] = [];
+  filtro: string = ''; // Propiedad para almacenar el valor del filtro
 
   constructor(
     private fb: FormBuilder,
@@ -119,5 +120,18 @@ export class RegistroDocenteComponent implements OnInit {
   mapCursoValue(value: string): string {
     const cursoOption = this.courseOptions.find((option) => option.value === value);
     return cursoOption ? cursoOption.label : '';
+  }
+
+  filtrarDocentes(): void {
+    // Realizar el filtrado basado en el valor del filtro
+    if (this.filtro.trim() !== '') {
+      const criterio = this.filtro.toLowerCase().trim();
+      this.docenteToDisplay = this.docente.filter((docente) => {
+        const nombreCompleto = `${docente.nombre} ${docente.apellido}`.toLowerCase();
+        return nombreCompleto.includes(criterio) || docente.correo.toLowerCase().includes(criterio);
+      });
+    } else {
+      this.docenteToDisplay = this.docente; // Restablecer la lista completa de docentes
+    }
   }
 }

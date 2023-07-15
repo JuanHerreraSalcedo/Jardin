@@ -6,7 +6,7 @@
         </div>
 
         <div class="search-employees">
-            <input type="search" class="form-control" placeholder="Buscar al docente">
+            <input type="text" class="form-control" [(ngModel)]="filtro" (input)="filtrarDocentes()" placeholder="Buscar al docente">
         </div>
     </div>
     

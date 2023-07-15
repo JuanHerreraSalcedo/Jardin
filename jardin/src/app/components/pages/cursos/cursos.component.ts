@@ -39,7 +39,7 @@ export class CursosComponent implements OnInit {
     Swal.fire({
       title: 'Jardín',
       text: 'En nuestro Jardín reconocemos la importancia de cultivar el amor por el aprendizaje y la curiosidad intelectual en nuestros niños de Jardín. Promovemos el desarrollo de habilidades de pensamiento crítico, resolución de problemas y comunicación efectiva, preparando a los estudiantes para enfrentar los retos académicos',
-      imageUrl: 'https://unsplash.it/400/200',
+      imageUrl: '../../../../../assets/img/Cartel_para_Jardin.png',
       imageWidth: 300,
       imageHeight: 100,
       imageAlt: 'Custom image',
@@ -49,7 +49,7 @@ export class CursosComponent implements OnInit {
     Swal.fire({
       title: 'Transición',
       text: 'En nuestro curso de transición, nos enfocamos en brindar a los estudiantes una transición suave y exitosa desde el jardín de infantes hacia la escuela primaria, comprometiéndonos en brindar a los estudiantes una base sólida que los prepare para tener éxito en su próximo nivel educativo. fomentando también el respeto mutuo, la empatía y la colaboración, creando un ambiente inclusivo donde cada estudiante se sienta valorado y respetado.',
-      imageUrl: 'https://unsplash.it/400/200',
+      imageUrl: '../../../../../assets/img/transicion_2.png',
       imageWidth: 300,
       imageHeight: 100,
       imageAlt: 'Custom image',

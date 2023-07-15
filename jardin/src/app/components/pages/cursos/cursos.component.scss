@@ -122,6 +122,43 @@
     text-decoration:none;
   }
   
+  .home__leaf-1{
+    width: 100px;
+    top: 13rem;
+    left: 0rem;
+    transform: rotate(41deg);
+    position: absolute;
+    opacity: 0.2;
+  }  
+  .home__leaf-2{
+    width: 100px;
+    right: -2rem;
+    bottom: 1rem;
+    transform: rotate(-15deg);
+    position: absolute;
+    opacity: .2;
+    top: 25rem;
+  } 
+  .acerca__leaf{
+    width: 100px;
+    opacity: .2;
+    position: absolute;
+    right: -1.5rem;
+    bottom: -50rem;
+    transform: rotate(-15deg);
+  }
+  .acerca__leaf2{
+    width: 100px;
+    opacity: .2;
+    position: absolute;
+    left: 0rem;
+    bottom: -30rem;
+    transform: rotate(-15deg);
+  }
+
+  .banners{
+    height: 125px;
+  }
 
 @media (max-width: 767px) {
     .banner__Bcards {
@@ -135,4 +172,17 @@
     .cards {
         margin-bottom: 20px;
     }
+
+    .home__leaf-1{
+      display: none;
+    }  
+  .home__leaf-2{
+      display: none;
+    } 
+  .acerca__leaf{
+      display: none;
+  }
+  .acerca__leaf2{
+      display: none;
+  }
 }
