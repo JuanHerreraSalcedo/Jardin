@@ -19,6 +19,7 @@
           <th>Edad</th>
           <th>Fecha de nacimiento</th>
           <th>Teléfono</th>
+          <th>Correo del padre</th>
           <th>Reportes</th>
         </tr>
       </thead>
@@ -46,6 +47,9 @@
           <td>
             <p class="fw-normal mb-1">{{ estudiante.telefono }}</p>
           </td>
+          <td>
+            <p class="fw-normal mb-1">{{ estudiante.correoAcudiente }}</p>
+          </td>          
           <td>
             <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="seleccionarEstudiante(estudiante)">Realizar reporte</button>
           </td>
