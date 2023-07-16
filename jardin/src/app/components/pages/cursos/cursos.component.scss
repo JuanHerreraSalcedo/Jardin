@@ -9,13 +9,15 @@
 .btn {
     justify-content: center;
     display: flex;
-    background-color: #8000FF;
-    border: 2px solid #8000FF;
+    background-color: #FF7B29;
+    border: 2px solid #FF7B29;
+    color: #fff;
 }
 
 .btn:hover {
-    background-color: #078CAA;
-    border: 2px solid #078CAA;
+    background-color: #fff;
+    border: 2px solid #FF7B29;
+    color: #FF7B29;
 }
 
 .banner__Bcards {

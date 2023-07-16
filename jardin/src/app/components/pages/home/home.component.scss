@@ -15,8 +15,15 @@
 .btn {
   justify-content: center;
   display: flex;
-  background-color: #8000FF;
-  border: 2px solid #8000FF;
+  background-color: #61C3C9;
+  border: 2px solid #61C3C9;
+  color: #fff;
+}
+
+.btn:hover {
+  background-color: #fff;
+  border: 2px solid #61C3C9;
+  color: #61C3C9;
 }
 
 .date {

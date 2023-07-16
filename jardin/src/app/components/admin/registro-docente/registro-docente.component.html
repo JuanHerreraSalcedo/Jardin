@@ -6,20 +6,20 @@
         </div>
 
         <div class="search-employees">
-            <input type="text" class="form-control" [(ngModel)]="filtro" (input)="filtrarDocentes()" placeholder="Buscar al docente">
+ <input type="text" class="form-control" placeholder="Buscar al docente">
         </div>
     </div>
     
     <!-- Listado de docentes -->
     <div class="employees">
-        <div class="row mt-5" *ngIf="docente.length === 0">
+        <!-- <div class="row mt-5">
             <div class="col text-center">
                 <span class="text-secondary fs-2 fw-bold fst-italic">No hay docentes actualmente</span>
             </div>
-        </div>
+        </div> -->
     
         <!-- Listado de los docentes activos -->
-        <div class="row mt-4" *ngFor="let docente of docenteToDisplay; let ei = index;">
+        <div class="row mt-4">
             <div class="col">
                 <app-listado-docentes>
 

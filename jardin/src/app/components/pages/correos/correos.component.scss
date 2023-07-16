@@ -32,7 +32,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-	color: #57b846;
+	color: #D85F89;
 }
 
 /*---------------------------------------------*/
@@ -117,8 +117,8 @@ iframe {
 
 .container-contact1 {
     margin-top: 45px;
-  width: 1163px;
-  background: #7A6C6C;
+  width: 1410px;
+  background: #fff;
   border-radius: 10px;
   overflow: hidden;
 
@@ -137,7 +137,7 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .contact1-pic {
-  width: 296px;
+  width: 650px;
 }
 
 .contact1-pic img {
@@ -207,7 +207,7 @@ textarea.input1 + .shadow-input1 {
   width: 100%;
   height: 100%;
   box-shadow: 0px 0px 0px 0px;
-  color: rgba(87,184,70, 0.5);
+  color: #f166976c;
 }
 
 .input1:focus + .shadow-input1 {
@@ -244,7 +244,7 @@ textarea.input1 + .shadow-input1 {
   min-width: 193px;
   height: 50px;
   border-radius: 25px;
-  background: #57b846;
+  background: #D85F89;
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
@@ -274,7 +274,9 @@ textarea.input1 + .shadow-input1 {
 }
 
 .contact1-form-btn:hover {
-  background: #333333;
+  background: #fff;
+  border: solid #D85F89 ;
+  color: #D85F89;
 }
 
 .contact1-form-btn:hover i {
