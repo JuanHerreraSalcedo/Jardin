@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registro-docente',
@@ -11,8 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./registro-docente.component.scss']
 })
 export class RegistroDocenteComponent implements OnInit {
-  @ViewChild('tempButton') buttontemp: any;
-  title = 'Crud docentes';
+  registrarUsuario: FormGroup;
 
   courseOptions = [
     { value: 'Párvulos', label: 'Párvulos' },
@@ -20,17 +19,12 @@ export class RegistroDocenteComponent implements OnInit {
     { value: 'Prejardín', label: 'Prejardín' },
     { value: 'Jardín', label: 'Jardín' },
   ];
-
-  registrarUsuario: FormGroup;
-  docente: any[] = [];
-  docenteToDisplay: any[] = [];
-  filtro: string = ''; // Propiedad para almacenar el valor del filtro
-
+  
   constructor(
     private fb: FormBuilder,
+    private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {
     this.registrarUsuario = this.fb.group({
       nombre: ['', Validators.required],
@@ -40,7 +34,7 @@ export class RegistroDocenteComponent implements OnInit {
       repetirContraseña: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       genero: ['', Validators.required],
-      curso: ['', Validators.required],
+      curso: ['', Validators.required], // Agregado el campo 'curso' al formulario
       fotoPerfil: [null],
       escuela: ['', Validators.required],
       anios: ['', Validators.required],
@@ -48,20 +42,7 @@ export class RegistroDocenteComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.firestore.collection('usuarios', ref => ref.where('rol', '==', 'docente'))
-      .valueChanges()
-      .subscribe((data: any) => {
-        this.docente = data;
-        this.docenteToDisplay = data;
-      });
-  }
-
-  ngAfterViewInit(): void {
-    if (this.buttontemp) {
-      this.buttontemp.nativeElement.click();
-    }
-  }
+  ngOnInit(): void { }
 
   async registrar() {
     if (this.registrarUsuario.valid) {
@@ -73,7 +54,7 @@ export class RegistroDocenteComponent implements OnInit {
       const rol = 'docente';
       const fechaNacimiento = this.registrarUsuario.value.fechaNacimiento;
       const genero = this.registrarUsuario.value.genero;
-      const curso = this.mapCursoValue(this.registrarUsuario.value.curso);
+      const curso = this.registrarUsuario.value.curso;
       const fotoPerfil = this.registrarUsuario.value.fotoPerfil;
       const escuela = this.registrarUsuario.value.escuela;
       const anios = this.registrarUsuario.value.anios;
@@ -85,7 +66,12 @@ export class RegistroDocenteComponent implements OnInit {
       }
 
       try {
-        await this.firestore.collection('usuarios').add({
+        // Crear el usuario en Firebase Authentication
+        const userCredential = await this.afAuth.createUserWithEmailAndPassword(correo, contraseña);
+        const userId = userCredential.user?.uid;
+
+        // Guardar los datos en Firestore
+        await this.firestore.collection('usuarios').doc(userId).set({
           nombre: nombre,
           apellido: apellido,
           correo: correo,
@@ -101,7 +87,7 @@ export class RegistroDocenteComponent implements OnInit {
           salario: salario
         });
 
-        console.log('Datos guardados en Firestore');
+        console.log('Datos guardados en Firestore y usuario registrado en Firebase');
         Swal.fire({
           title: 'Usuario creado',
           text: 'El usuario ha sido registrado exitosamente',
@@ -110,28 +96,23 @@ export class RegistroDocenteComponent implements OnInit {
         }).then(() => {
           this.registrarUsuario.reset();
         });
-      } catch (error) {
+      } catch (error: any) { // <- Se añade ": any" para corregir el error
         console.error('Error al crear el usuario: ', error);
-        Swal.fire('Error', 'Ocurrió un error al crear el usuario', 'error');
+        Swal.fire('Error', this.firebaseError(error.code), 'error');
       }
     }
   }
 
-  mapCursoValue(value: string): string {
-    const cursoOption = this.courseOptions.find((option) => option.value === value);
-    return cursoOption ? cursoOption.label : '';
-  }
-
-  filtrarDocentes(): void {
-    // Realizar el filtrado basado en el valor del filtro
-    if (this.filtro.trim() !== '') {
-      const criterio = this.filtro.toLowerCase().trim();
-      this.docenteToDisplay = this.docente.filter((docente) => {
-        const nombreCompleto = `${docente.nombre} ${docente.apellido}`.toLowerCase();
-        return nombreCompleto.includes(criterio) || docente.correo.toLowerCase().includes(criterio);
-      });
-    } else {
-      this.docenteToDisplay = this.docente; // Restablecer la lista completa de docentes
+  firebaseError(code: string) {
+    switch (code) {
+      case 'auth/email-already-in-use':
+        return 'El usuario que estás registrando ya existe';
+      case 'auth/weak-password':
+        return 'La contraseña es muy débil';
+      case 'auth/invalid-email':
+        return 'El correo es inválido';
+      default:
+        return 'Error desconocido';
     }
   }
 }

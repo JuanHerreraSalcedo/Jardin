@@ -50,7 +50,7 @@
               administración
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li class="dropdown-item" routerLink="/registro-alumno">Registro alumno</li>
+              <li class="dropdown-item" routerLink="/registro-alumno">Registro de alumnos</li>
               <li class="dropdown-item" routerLink="/registro-docente">Listado de docentes</li>
             </ul>
           </li>
@@ -76,7 +76,10 @@
             <a class="nav-link" routerLink="/calendario">Calendario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones</a>
+            <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones con docentes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://meet.google.com/wwk-tssb-pyu?pli=1" target="_blank">Reuniones con acudientes</a>
           </li>
         </ul>
       </div>
@@ -121,7 +124,13 @@
                 <a class="nav-link active" aria-current="page" routerLink="/calendario">Calendario</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" routerLink="/correos">Dirigenciar correo</a>
+                <a class="nav-link active" aria-current="page" routerLink="/correos">Diligenciar correo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones con administración</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://meet.google.com/wwk-tssb-pyu?pli=1" target="_blank">Reuniones con acudientes</a>
               </li>
             </ul>
             <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
@@ -155,6 +164,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" routerLink="calendario">Calendario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://meet.google.com/wwk-tssb-pyu?pli=1" target="_blank">Reuniones con docentes</a>
               </li>
             </ul>
             <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
@@ -217,7 +229,7 @@
             <a class="nav-link active" aria-current="page" routerLink="/registro-docente">Listado docentes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/registro-alumnos">Registro alumnos</a>
+            <a class="nav-link active" aria-current="page" routerLink="/registro-alumno">Registro de alumnos</a>
           </li>
           <!-- Agrega aquí los enlaces específicos para el rol de admin en la versión móvil -->
           <li class="nav-item">
@@ -233,10 +245,13 @@
             <a class="nav-link" routerLink="/jardin">Listado Jardín</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="">Diligenciar correos</a>
+            <a class="nav-link" routerLink="/correos">Diligenciar correos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones</a>
+            <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones con docentes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://meet.google.com/wwk-tssb-pyu?pli=1" target="_blank">Reuniones con acudientes</a>
           </li>
 
           <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
@@ -264,7 +279,13 @@
             <a class="nav-link active" aria-current="page" routerLink="/calendario">Calendario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/correos">Dirigenciar correo</a>
+            <a class="nav-link active" aria-current="page" routerLink="/correos">Diligenciar correo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://meet.google.com/bgy-ahqs-ohe?pli=1" target="_blank">Reuniones con administración</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://meet.google.com/wwk-tssb-pyu?pli=1" target="_blank">Reuniones con acudientes</a>
           </li>
         </ul>
         <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
@@ -293,6 +314,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" routerLink="calendario">Calendario</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://meet.google.com/wwk-tssb-pyu?pli=1" target="_blank">Reuniones con docentes</a>
             </li>
           </ul>
           <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
