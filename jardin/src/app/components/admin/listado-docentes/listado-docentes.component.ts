@@ -25,7 +25,7 @@ export class ListadoDocentesComponent implements OnInit {
       .get()
       .then((querySnapshot) => {
         const uniqueDocentes: any[] = [];
-        querySnapshot.forEach((doc: any) => { // Especificar el tipo 'any' para la variable 'doc'
+        querySnapshot.forEach((doc: any) => {
           const docente = { id: doc.id, ...doc.data() };
           if (!uniqueDocentes.some((d) => d.id === docente.id)) {
             uniqueDocentes.push(docente);
@@ -39,11 +39,13 @@ export class ListadoDocentesComponent implements OnInit {
   }
 
   borrarDocente(docenteId: string): void {
+    console.log('Borrar docente:', docenteId);
     this.firestore.collection('usuarios').doc(docenteId)
       .delete()
       .then(() => {
         console.log('Docente eliminado correctamente');
-        // Realiza las acciones necesarias después de borrar el docente
+        // Actualizar la lista de docentes después de eliminar uno
+        this.obtenerDocentes();
       })
       .catch((error) => {
         console.error('Error al borrar el docente:', error);
