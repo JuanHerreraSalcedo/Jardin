@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class RegistroAlumnoComponent implements OnInit {
   registrarEstudiante: FormGroup;
-  usuarioId?: string; // Variable para almacenar el ID del usuario registrado
+  usuarioId?: string;
+
   courseOptions = [
     { value: 'Párvulos', label: 'Párvulos' },
     { value: 'Transición', label: 'Transición' },
@@ -32,8 +33,8 @@ export class RegistroAlumnoComponent implements OnInit {
       apellidos: ['', Validators.required],
       curso: ['', Validators.required],
       edad: ['', Validators.required],
-      carneVacunas: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
+      carneVacunas: [''],
+      fechaNacimiento: [''],
       direccion: ['', Validators.required],
       telefono: ['', Validators.required],
       ciudad: ['', Validators.required],
@@ -79,21 +80,18 @@ export class RegistroAlumnoComponent implements OnInit {
         fechaNacimiento: fechaNacimiento,
         direccion: direccion,
         telefono: telefono,
-        ciudad: ciudad
+        ciudad: ciudad,
+        usuarioId: this.usuarioId // Vincular al usuario autenticado
       });
 
-      // Crear una subcolección "acudientes" dentro del documento del estudiante y vincularlo al acudiente
-      await estudianteRef.collection('usuarios').doc(this.usuarioId).set({});
-
+      // Mostrar SweetAlert y luego resetear el formulario
       Swal.fire({
         title: 'Éxito',
         text: 'Estudiante registrado exitosamente',
         icon: 'success',
         allowOutsideClick: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/registro-alumno']); // Reemplaza '/otra-vista' con la ruta a la siguiente vista
-        }
+      }).then(() => {
+        this.registrarEstudiante.reset();
       });
     } else {
       Swal.fire('Error', 'No se pudo obtener el usuario actual', 'error');
