@@ -83,7 +83,7 @@ export class RegistroComponent implements OnInit {
             allowOutsideClick: false
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/iniciar-sesion']);
+              this.router.navigate(['/calendario']);
               // this.loading = false;
             }
           });
