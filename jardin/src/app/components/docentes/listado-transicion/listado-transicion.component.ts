@@ -15,7 +15,7 @@ export class ListadoTransicionComponent implements OnInit {
   estudiantesPaginados: any[] = [];
   buscarEstudiante: string = '';
   currentPage: number = 1;
-  itemsPerPage: number = 15; // Actualiza el número máximo de registros por página
+  itemsPerPage: number = 15;
 
   constructor(
     private firestore: AngularFirestore,
@@ -32,25 +32,40 @@ export class ListadoTransicionComponent implements OnInit {
       .valueChanges()
       .subscribe((estudiantes) => {
         this.estudiantes = estudiantes;
-        this.sortEstudiantesAlfabeticamente(); // Ordenar estudiantes alfabéticamente
-        this.paginarEstudiantes(); // Paginar estudiantes
+        this.sortEstudiantesAlfabeticamente();
+        this.paginarEstudiantes();
       });
   }
 
   filtrarEstudiantes(): void {
-    this.currentPage = 1; // Reiniciar la página actual al realizar una búsqueda
+    this.currentPage = 1;
 
     if (this.buscarEstudiante.trim() !== '') {
       const criterio = this.buscarEstudiante.toLowerCase().trim();
-      this.estudiantes = this.estudiantes.filter((estudiante) => {
+      const estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
         const nombreCompleto = `${estudiante.nombres} ${estudiante.apellidos}`.toLowerCase();
         return nombreCompleto.includes(criterio);
       });
+
+      if (estudiantesFiltrados.length > 0) {
+        this.estudiantes = estudiantesFiltrados;
+      } else {
+        // No se encontraron resultados, mantener la lista completa de estudiantes
+        this.obtenerEstudiantes();
+      }
     } else {
-      this.obtenerEstudiantes(); // Restablecer la lista completa de estudiantes
+      // Restablecer la lista completa de estudiantes
+      this.firestore
+        .collection('estudiantes', (ref) => ref.where('curso', '==', 'Transición'))
+        .valueChanges()
+        .subscribe((estudiantes) => {
+          this.estudiantes = estudiantes;
+          this.sortEstudiantesAlfabeticamente();
+          this.paginarEstudiantes();
+        });
     }
 
-    this.paginarEstudiantes(); // Actualizar estudiantes paginados después de filtrar
+    this.paginarEstudiantes();
   }
 
   paginarEstudiantes(): void {
@@ -70,18 +85,13 @@ export class ListadoTransicionComponent implements OnInit {
   }
 
   descargarLista(): void {
-    // Crear el libro de Excel
     const workbook: XLSX.WorkBook = XLSX.utils.book_new();
-
-    // Crear la hoja de Excel y agregar los datos
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.estudiantes);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Lista de Estudiantes');
-
-    // Generar el archivo Excel
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-
-    // Descargar el archivo Excel
+    const data: Blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    });
     saveAs(data, 'lista_estudiantes.xlsx');
   }
 
